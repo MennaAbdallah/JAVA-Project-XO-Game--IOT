@@ -13,6 +13,20 @@ public class SimpleUser {
     protected String userName,nickName;
     protected int _id,score,status;
 
+    public SimpleUser() {
+    }
+
+    
+    public SimpleUser(String userName, String nickName, int _id, int score, int status) {
+        this.userName = userName;
+        this.nickName = nickName;
+        this._id = _id;
+        this.score = score;
+        this.status = status;
+    }
+    
+    
+
     public String getUserName() {
         return userName;
     }
@@ -53,4 +67,10 @@ public class SimpleUser {
         this.status = status;
     }
 
+    @Override
+    public String toString() {
+        return "SimpleUser{" + "userName=" + userName + ", nickName=" + nickName + ", _id=" + _id + ", score=" + score + ", status=" + status + '}';
+    }
+
+    
 }
