@@ -25,22 +25,20 @@ public class DBManagment {
     public static void main(String[] args) {
         try {
             DBManagment dbm = new DBManagment();
-            User user = dbm.getUser(1);
+            User user = dbm.getUser(2);
             System.out.println(user.toString());
-            user.setId(3);
-            user.setUserName("mina");
-            dbm.insertNewUser(user);
-            user.setStatus(1);
-            System.out.println(dbm.setStatus(user.getId(), 1));
+            user.setStatus(2);
+            System.out.println(dbm.setStatus(user.getId(), user.getStatus()));
+            System.out.println(dbm.getStatus(user.getId()).toString());
+            System.out.println(dbm.setPassword(user.getId(), "test2"));
         } catch (SQLException ex) {
             Logger.getLogger(DBManagment.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DBManagment.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    ///////////////////////////
 
+    ///////////////////////////
     public DBManagment() throws SQLException, ClassNotFoundException {
         try {
             //Class.forName("org.sqlite.JDBC");
@@ -61,30 +59,31 @@ public class DBManagment {
         try {
             PreparedStatement stmt = c.prepareStatement("SELECT * FROM user where id = ?;", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             stmt.setInt(1, id);
-            
+
             ResultSet rs = stmt.executeQuery();
             //if (rs.getFetchSize() != 0) {
-                rs.first();
-                //System.out.println(rs.toString());
-                user = new User(rs.getString("username"),
-                        rs.getString("nickname"),
-                        rs.getString("password"),
-                        rs.getString("email"),
-                        rs.getInt("id"),
-                        rs.getInt("score"),
-                        rs.getInt("status"));
-                return user;
+            rs.first();
+            //System.out.println(rs.toString());
+            user = new User(rs.getString("username"),
+                    rs.getString("nickname"),
+                    rs.getString("password"),
+                    rs.getString("email"),
+                    rs.getInt("id"),
+                    rs.getInt("score"),
+                    rs.getInt("status"));
+            return user;
 
             //}
         } catch (SQLException ex) {
             Logger.getLogger(DBManagment.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;
+        throw new NullPointerException("Can't connect to db");
+
     }
-    
-    public boolean insertNewUser(User newUser){
+
+    public boolean insertNewUser(User newUser) {
         try {
-            
+
             PreparedStatement stmt = c.prepareStatement("INSERT INTO user(username,password,nickname,email,score) VALUES(?,?,?,?,?)", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             stmt.setString(1, newUser.getUserName());
             stmt.setString(2, newUser.getPassword());
@@ -94,26 +93,65 @@ public class DBManagment {
 
             int rs = stmt.executeUpdate();
             System.out.println(rs);
-            
-            return rs>0;
+
+            return rs > 0;
         } catch (SQLException ex) {
             Logger.getLogger(DBManagment.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return false;
+        throw new NullPointerException("Can't connect to db");
     }
-    
-    public boolean setStatus(int id,int status){
+
+    public boolean setStatus(int id, int status) {
         try {
             PreparedStatement stmt = c.prepareStatement("UPDATE user set status=? where id = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             stmt.setString(1, String.valueOf(status));
             stmt.setInt(2, id);
             int rs = stmt.executeUpdate();
-            return rs>0;
+            return rs > 0;
         } catch (SQLException ex) {
             Logger.getLogger(DBManagment.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return false;
+        throw new NullPointerException("Can't connect to db");
+    }
+
+    public SimpleUser getStatus(int id) {
+        try {
+            PreparedStatement stmt = c.prepareStatement("select id,score,status,username,nickname from user where id = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.first()) {
+                SimpleUser simpleUser = new SimpleUser(rs.getString("username"),
+                        rs.getString("nickname"),
+                        rs.getInt("id"),
+                        rs.getInt("score"),
+                        Integer.valueOf(rs.getString("status"))
+                );
+                return simpleUser;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DBManagment.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        throw new NullPointerException("Can't connect to db");
+
+    }
+
+    public boolean setPassword(int id, String newPassword) {
+        try {
+            PreparedStatement stmt = c.prepareStatement("UPDATE user set password=? where id = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            stmt.setString(1, newPassword);
+            stmt.setInt(2, id);
+            int rs = stmt.executeUpdate();
+            return rs > 0;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DBManagment.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        throw new NullPointerException("can't update user table by new password");
     }
 
 }
