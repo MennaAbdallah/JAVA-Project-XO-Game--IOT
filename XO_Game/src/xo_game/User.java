@@ -9,10 +9,9 @@ package xo_game;
  *
  * @author mashael
  */
-public class User {
+public class User extends SimpleUser{
     
-    private String userName,nickName,password,email;
-    private int _id,score,status;
+    private String password,email;
 
     public User() {
     }
@@ -25,24 +24,6 @@ public class User {
         this._id = _id;
         this.score = score;
         this.status = status;
-    }
-    
-    
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getNickName() {
-        return nickName;
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
     }
 
     public String getPassword() {
@@ -60,30 +41,9 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
+    
+    
 
-    public int getId() {
-        return _id;
-    }
-
-    public void setId(int _id) {
-        this._id = _id;
-    }
-
-    public int getScore() {
-        return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
 
     @Override
     public String toString() {
