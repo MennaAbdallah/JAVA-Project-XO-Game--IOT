@@ -38,7 +38,7 @@ public class DBManagment {
             Logger.getLogger(DBManagment.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        try {
+        /*try {
             DBManagment dbm = new DBManagment();
             User user = dbm.getUser(2);
             System.out.println(user.toString());
@@ -50,7 +50,7 @@ public class DBManagment {
             Logger.getLogger(DBManagment.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DBManagment.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
     }
     ///////////////////////////
     public DBManagment(){
