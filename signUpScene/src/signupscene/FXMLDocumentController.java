@@ -49,6 +49,9 @@ public class FXMLDocumentController implements Initializable {
         if(emailTF.getText().trim().isEmpty()) {
             emailErr.setText("Please enter your Email!");
         }
+        else if(!emailTF.getText().matches("^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")){
+            emailErr.setText("Invalid Email!");
+        }
         else
         {
             emailErr.setText("");
@@ -57,17 +60,14 @@ public class FXMLDocumentController implements Initializable {
         if(passwordTF.getText().trim().isEmpty()) {
             passwordErr.setText("Please enter password!");
         }
-        else if(!passwordTF.getText().matches("\\w{8,}")){
-            passwordErr.setText("The password must be 8 characters or longer!");
+        else if(!passwordTF.getText().matches("(\\w{8,})")){
+            passwordErr.setText("Invalid password");
         }
         else
         {
             passwordErr.setText("");
         }
 
-            System.out.print(passwordTF.getText() + "\n");
-            System.out.print(confirmPasswordTF.getText() + "\n");
-            System.out.print((passwordTF.getText() == confirmPasswordTF.getText()) + "\n");
         if(confirmPasswordTF.getText().trim().isEmpty()) {
             confirmErr.setText("Please confirm your password!");
         }

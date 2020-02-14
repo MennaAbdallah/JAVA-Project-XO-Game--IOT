@@ -11,6 +11,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import java.util.regex.*;  
 
 /**
  *
@@ -19,12 +22,32 @@ import javafx.scene.control.Label;
 public class FXMLDocumentController implements Initializable {
     
     @FXML
-    private Label label;
+    private Label serverIPErr, serverPortErr, DBHostErr ,DBPortErr;
     
     @FXML
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
+    private TextField serverIPTF,serverPortTF, DBHostTF, DBPortTF;
+    
+    @FXML
+    private void connectClick(MouseEvent event) {
+        if(!serverIPTF.getText().matches("^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
+		"([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
+		"([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
+		"([01]?\\d\\d?|2[0-4]\\d|25[0-5])$")){
+            serverIPErr.setText("Invalid IP");
+        }
+        else{
+            serverIPErr.setText("");
+        }
+        
+        if(!DBHostTF.getText().matches("^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
+		"([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
+		"([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
+		"([01]?\\d\\d?|2[0-4]\\d|25[0-5])$")){
+            DBHostErr.setText("Invalid IP");
+        }
+        else{
+            DBHostErr.setText("");
+        }
     }
     
     @Override

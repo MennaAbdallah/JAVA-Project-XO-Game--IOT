@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="509.0" prefWidth="909.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="509.0" prefWidth="909.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="profile.FXMLDocumentController">
    <top>
       <AnchorPane prefHeight="209.0" prefWidth="910.0" style="-fx-background-color: #F95A57;" BorderPane.alignment="CENTER">
          <children>
@@ -39,10 +39,11 @@
                   <Button fx:id="passwdBtn" mnemonicParsing="false" onMouseClicked="#passwdClick" prefHeight="40.0" prefWidth="909.0" style="-fx-background-color: transparent; -fx-text-fill: black;" text="Change Password" />
                   <VBox id="passwdVbox" fx:id="passwdVbox" prefHeight="108.0" prefWidth="909.0" visible="false">
                      <children>
-                        <PasswordField alignment="CENTER" promptText="Old Password" />
-                        <PasswordField alignment="CENTER" promptText="New Password" />
-                        <PasswordField alignment="CENTER" prefHeight="20.0" prefWidth="909.0" promptText="Confirm New Password" />
-                        <Button alignment="CENTER" mnemonicParsing="false" prefHeight="32.0" prefWidth="915.0" text="Save Password" />
+                        <PasswordField fx:id="oldPWTF" alignment="CENTER" promptText="Old Password" />
+                        <PasswordField fx:id="newPWTF" alignment="CENTER" promptText="New Password" />
+                        <PasswordField fx:id="confirmPWTF" alignment="CENTER" prefHeight="20.0" prefWidth="909.0" promptText="Confirm New Password" />
+                        <Label fx:id="pwErr" alignment="CENTER" prefHeight="35.0" prefWidth="306.0" style="-fx-text-fill: #F95A57;" />
+                        <Button fx:id="savePWBtn" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#savePWClick" prefHeight="32.0" prefWidth="915.0" text="Save Password" />
                      </children>
                   </VBox>
                </children>
@@ -51,15 +52,16 @@
                <children>
                   <VBox layoutX="4.0999755859375" layoutY="3.0999908447265625" AnchorPane.bottomAnchor="260.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Button fx:id="emailBtn" mnemonicParsing="false" prefHeight="40.0" prefWidth="338.0" style="-fx-background-color: transparent; -fx-text-fill: black;" text="Email" />
+                        <Button fx:id="emailBtn" mnemonicParsing="false" onMouseClicked="#emailClick" prefHeight="40.0" prefWidth="338.0" style="-fx-background-color: transparent; -fx-text-fill: black;" text="Email" />
                      </children>
                   </VBox>
                   <VBox id="emailVbox" fx:id="emailVbox" layoutX="-6.0" layoutY="123.0" prefHeight="260.0" prefWidth="305.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
                      <children>
-                        <TextField alignment="CENTER" promptText="Old Email" />
-                        <TextField alignment="CENTER" promptText="New Email" />
-                        <TextField alignment="CENTER" promptText="Confirm Email" />
-                        <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="311.0" text="Save Email" />
+                        <TextField fx:id="oldEmailTF" alignment="CENTER" promptText="Old Email" />
+                        <TextField fx:id="newEmailTF" alignment="CENTER" promptText="New Email" />
+                        <TextField fx:id="confirmEmailTF" alignment="CENTER" promptText="Confirm Email" />
+                        <Label fx:id="emailErr" alignment="CENTER" prefHeight="26.0" prefWidth="300.0" style="-fx-text-fill: #F95A57;" />
+                        <Button fx:id="saveEmailBtn" mnemonicParsing="false" onMouseClicked="#saveEmailClick" prefHeight="30.0" prefWidth="311.0" text="Save Email" />
                      </children>
                   </VBox>
                </children>
