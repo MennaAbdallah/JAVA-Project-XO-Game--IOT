@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxWidth="909.0" minWidth="909.0" prefHeight="509.0" prefWidth="909.0" style="-fx-background-color: #F95A57;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane layoutX="237.0" layoutY="37.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-radius: 30; -fx-background-color: #FFD9A5;" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="455.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="40.0">
+         <children>
+            <TextField alignment="CENTER" layoutX="226.0" layoutY="210.0" promptText="Database Host" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" />
+            <TextField alignment="CENTER" layoutX="226.0" layoutY="108.0" promptText="Server IP" AnchorPane.bottomAnchor="250.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" />
+            <TextField alignment="CENTER" layoutX="226.0" layoutY="158.0" promptText="Server Port" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" />
+            <TextField alignment="CENTER" layoutX="226.0" layoutY="261.0" promptText="Database Port" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" />
+            <ToggleButton layoutX="252.0" layoutY="318.0" mnemonicParsing="false" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-background-color: #F95A57;" text="Connect / Disconnect" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" />
+            <Label alignment="CENTER" layoutX="226.0" layoutY="53.0" prefHeight="43.0" prefWidth="520.0" style="-fx-text-fill: #F95A57;" text="Server" textFill="#f95a57" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <ImageView blendMode="DARKEN" fitHeight="169.0" fitWidth="179.0" layoutX="189.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="189.0" AnchorPane.rightAnchor="551.0">
+         <image>
+            <Image url="@server.png" />
+         </image>
+      </ImageView>
+      <ImageView blendMode="DARKEN" fitHeight="150.0" fitWidth="200.0" layoutX="97.0" layoutY="192.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@x.png" />
+         </image>
+      </ImageView>
+      <ImageView blendMode="DARKEN" fitHeight="150.0" fitWidth="200.0" layoutX="200.0" layoutY="245.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@o.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
