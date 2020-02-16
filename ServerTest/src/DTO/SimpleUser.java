@@ -1,5 +1,6 @@
-package LoginScene;
+package DTO;
 
+import java.io.Serializable;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -11,7 +12,7 @@ package LoginScene;
  *
  * @author mashael
  */
-public class SimpleUser {
+public class SimpleUser implements Serializable{
     protected String userName,nickName;
     protected int _id,score,status;
 

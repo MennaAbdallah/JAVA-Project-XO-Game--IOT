@@ -1,4 +1,4 @@
-import RMI_Interfaces.LoginInterface;
+import xogameserver.interfaces.LoginInterface;
 import java.rmi.AlreadyBoundException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
