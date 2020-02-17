@@ -7,7 +7,7 @@ public class ImplExample implements LoginInterface {
     public boolean login(String username, String pass) throws RemoteException {
         System.out.println("User Name : "+username);
         System.out.println("Password : "+pass);
-        return false;
+        return true;
     }
     @Override
     public SimpleUser getuserData() {
