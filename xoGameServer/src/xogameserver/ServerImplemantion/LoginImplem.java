@@ -8,56 +8,47 @@ package xogameserver.ServerImplemantion;
 import java.rmi.RemoteException;
 import DTO.SimpleUser;
 import DTO.User;
+import java.rmi.server.UnicastRemoteObject;
 import xogameserver.DBManagment;
 import xogameserver.interfaces.LoginInterface;
-
-
-
 
 /**
  *
  * @author fegoo
  */
-public class LoginImplem implements LoginInterface{
+public class LoginImplem extends UnicastRemoteObject implements LoginInterface {
 
-               DBManagment test =new DBManagment();
-        User koko = new User();
-        
-        int login ;
+    DBManagment db = DBManagment.getInstance();
+    User loginUser = new User();
 
-    
+    int loginId;
+
+    public LoginImplem() throws RemoteException {
+    }
+
     @Override
     public boolean login(String username, String pass) throws RemoteException {
 
-         koko.setUserName(username);
-         koko.setPassword(pass);
-        System.out.println(koko.getUserName());
-        login = test.logIn(koko);
-                
-                    if (login > 0)
-                    {
-                        return true ;
-                    }
-                    else 
-                    {
-                        return false ;
-                    }
-                    
+        loginUser.setUserName(username);
+        loginUser.setPassword(pass);
+        System.out.println(loginUser.getUserName());
+        loginId = db.logIn(loginUser);
+
+        if (loginId > 0) {
+            return true;
+        } else {
+            return false;
+        }
 
     }
 
     @Override
     public SimpleUser getuserData() {
-        
-      koko= test.getUser(login);
-      
-      return koko;
-      
-        
-       
+
+        loginUser = db.getUser(loginId);
+
+        return loginUser;
+
     }
 
- 
-    
-    
 }

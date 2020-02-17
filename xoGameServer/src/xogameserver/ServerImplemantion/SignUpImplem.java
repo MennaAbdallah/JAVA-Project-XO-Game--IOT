@@ -7,6 +7,7 @@ package xogameserver.ServerImplemantion;
 
 import java.rmi.RemoteException;
 import DTO.User;
+import java.rmi.server.UnicastRemoteObject;
 import xogameserver.DBManagment;
 import xogameserver.interfaces.SignUp;
 
@@ -14,17 +15,20 @@ import xogameserver.interfaces.SignUp;
  *
  * @author fegoo
  */
-public class SignUpImplem implements SignUp{
+public class SignUpImplem extends UnicastRemoteObject implements SignUp{
     
     
-    DBManagment test =new DBManagment();
-    User koko = new User();
-    boolean value ;
+    
+    DBManagment db =DBManagment.getInstance();
+    User signUser = new User();
+    boolean isSignned  ;
+    
+   public SignUpImplem()throws RemoteException{}
 
     @Override
     public boolean signUp(User user) throws RemoteException {
-        value = test.insertNewUser(koko);
-        return value ;
+        isSignned = db.insertNewUser(signUser);
+        return isSignned ;
        
     }
     
