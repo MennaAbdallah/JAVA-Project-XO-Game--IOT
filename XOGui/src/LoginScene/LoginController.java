@@ -70,7 +70,7 @@ public class LoginController implements Initializable {
                 SimpleUser s=stub.getuserData();
                 Massage.setVisible(false);
                 //changeSceneVS();
-                changeSceneSignUP();
+                changeSceneVS();
             }
             else{
                 Massage.setText("User Name or Passaword incorrect");
@@ -99,6 +99,10 @@ public class LoginController implements Initializable {
                 networkLogin(UserBox.getText(), PasswordBox.getText());
             }
         } 
+    public void signUpButton(){
+        System.out.println("signUpButton");
+        changeSceneSignUP();
+    }
 
 
 }

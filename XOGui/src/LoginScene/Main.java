@@ -22,16 +22,20 @@ public class Main extends Application {
         return stub2;
     }
     public static Stage myStage;
-    
     @Override
     public void start(Stage primaryStage) throws Exception{
         myStage=primaryStage;
         try {
+            System.setProperty("java.security.policy","file:E:/security.policy");
+            if (System.getSecurityManager() == null)
+            {
+                System.setSecurityManager(new SecurityManager());
+            }
             // Getting the registry
-             Registry registry = LocateRegistry.getRegistry("127.0.0.1",5005);
+             Registry registry = LocateRegistry.getRegistry("192.168.1.5",5030);
              // Looking up the registry for the remote object
-             stub = (LoginInterface) registry.lookup("Hello");
-             stub2=(SignUp) registry.lookup("SignUP");
+             stub = (LoginInterface) registry.lookup("login");
+             stub2=(SignUp) registry.lookup("signup");
             // Calling the remote method using the obtained object
         }
         catch (Exception e) {

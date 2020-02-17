@@ -65,7 +65,6 @@ public class SignUpController implements Initializable {
         } else {
             emailErr.setText("");
         }
-
         if (passwordTF.getText().trim().isEmpty()) {
             passwordErr.setText("Please enter password!");
             flag = false;
@@ -115,25 +114,26 @@ public class SignUpController implements Initializable {
     }
     public boolean networkSignUp(boolean flag){
         try{
-            if(flag==true){
-              User user=new User();
-              user.setEmail(emailTF.getText());
-              user.setPassword(passwordTF.getText());
-              user.setUserName(nameTF.getText());
-              user.setNickName(nickNameTF.getText()); 
-              System.out.println("Email : "+emailTF.getText()+" , Pass : "+passwordTF.getText()+" , Name : "
-                        +nameTF.getText()+" , NName : "+nickNameTF.getText());
-              boolean check=Main.getStubSignUp().signUp(user);
-              if(check==true){
-                  changeSceneLogin();
-              }
+                if(flag==true){
+                  User user=new User();
+                  user.setEmail(emailTF.getText());
+                  user.setPassword(passwordTF.getText());
+                  user.setUserName(nameTF.getText());
+                  user.setNickName(nickNameTF.getText()); 
+                  System.out.println("Email : "+emailTF.getText()+" , Pass : "+passwordTF.getText()+" , Name : "
+                            +nameTF.getText()+" , NName : "+nickNameTF.getText());
+                    System.out.println(user.toString());
+                  boolean check=Main.getStubSignUp().signUp(user);
+                  if(check==true){
+                      changeSceneLogin();
+                  }
             }
             else{
-                System.out.println("Error in Signup Menu");
+                    System.out.println("Error in Signup Menu");
             }
         }
         catch(Exception RemoteException){
-            System.err.println("Error From Connection Stub2");
+                    System.err.println("Error From Connection Stub2");
         }
        
         
