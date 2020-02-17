@@ -24,7 +24,7 @@ public class DBManagment {
 
     private static DBManagment dbm = null;
     private static Connection c = null;
-    private static String dbPort = "3306";
+    private static String dbPort = "3307";
     private static String dbDriver = "com.mysql.jdbc.Driver";
     private static String dbUser = "root";
     private static String dbPass = "";
@@ -33,7 +33,8 @@ public class DBManagment {
 
         try {
             Class.forName(dbDriver).newInstance();
-            c = DriverManager.getConnection("jdbc:mysql://localhost:" + dbPort + "/javaGame", dbUser, dbPass);
+            c = DriverManager.getConnection("jdbc:mysql://localhost:" + dbPort + "/XoGameDB", dbUser, dbPass);
+            System.out.println("db connected");
         } catch (InstantiationException | IllegalAccessException ex) {
             Logger.getLogger(DBManagment.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -147,9 +148,9 @@ public class DBManagment {
 
     public int logIn(User user) {
         try {
-            PreparedStatement stmt = c.prepareStatement("SELECT id FROM user where email = ? and password = ?;",
+            PreparedStatement stmt = c.prepareStatement("SELECT id FROM user where username = ? and password = ?;",
                     ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            stmt.setString(1, user.getEmail());
+            stmt.setString(1, user.getUserName());
             stmt.setString(2, user.getPassword());
             ResultSet rs = stmt.executeQuery();
             rs.first();
@@ -205,6 +206,7 @@ public class DBManagment {
         try {
 
             PreparedStatement stmt = c.prepareStatement("INSERT INTO user(username,password,nickname,email,score) VALUES(?,?,?,?,?)", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            System.out.println(newUser.toString());
             stmt.setString(1, newUser.getUserName());
             stmt.setString(2, newUser.getPassword());
             stmt.setString(3, newUser.getNickName());
