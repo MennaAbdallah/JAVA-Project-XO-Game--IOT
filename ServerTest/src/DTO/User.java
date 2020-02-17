@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-<<<<<<< HEAD
-=======
-package xo_game;
->>>>>>> origin/master
+
+package DTO;
+
+import java.io.Serializable;
 
 /**
  *
  * @author mashael
  */
-public class User extends SimpleUser{
+public class User extends SimpleUser implements Serializable{
     
     private String password,email;
 

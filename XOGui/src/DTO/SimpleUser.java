@@ -1,22 +1,18 @@
-<<<<<<< HEAD
+package DTO;
 
-=======
->>>>>>> origin/master
+import java.io.Serializable;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-<<<<<<< HEAD
-=======
-package xo_game;
->>>>>>> origin/master
 
 /**
  *
  * @author mashael
  */
-public class SimpleUser {
+public class SimpleUser implements Serializable{
     protected String userName,nickName;
     protected int _id,score,status;
 
