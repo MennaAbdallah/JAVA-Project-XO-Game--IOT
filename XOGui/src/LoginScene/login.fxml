@@ -68,7 +68,8 @@
                --> 
             </Button>
             
-            <Label layoutX="63.0" layoutY="380.0" prefHeight="18.0" prefWidth="78.0" style="-fx-background-color: #F95A57; -fx-background-radius: 90px;" text="Server Status" textFill="WHITE" />
+            <Button onAction="#serverStatus" layoutX="63.0" layoutY="380.0" prefHeight="18.0" prefWidth="78.0" style="-fx-background-color: #F95A57; -fx-background-radius: 90px;" text="Server Status" textFill="WHITE" >
+            </Button>
             <Circle fill="#98ff1f" layoutX="44.0" layoutY="389.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
          </children>
       </AnchorPane>

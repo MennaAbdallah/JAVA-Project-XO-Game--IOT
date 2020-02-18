@@ -19,7 +19,7 @@ import java.util.regex.*;
  *
  * @author menna
  */
-public class FXMLDocumentController implements Initializable {
+public class ServerOnlineListController implements Initializable {
     
     @FXML
     private Label serverIPErr, serverPortErr, DBHostErr ,DBPortErr;

@@ -17,8 +17,8 @@ public class TestRMIServer
                 LoginInterface sub = (LoginInterface) UnicastRemoteObject.exportObject((Remote) obj,5005);
                 SignUp sub2 = (SignUp) UnicastRemoteObject.exportObject((Remote) s,5005);
                 Registry registry = LocateRegistry.createRegistry(5005);
-                registry.bind("Hello",sub);
-                registry.bind("SignUP",sub2);
+                registry.bind("login",sub);
+                registry.bind("signup",sub2);
                 System.out.println("Server Ready");
             } 
             catch (RemoteException | AlreadyBoundException e) {
