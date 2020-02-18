@@ -8,26 +8,28 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="509.0" maxWidth="909.0" minHeight="509.0" minWidth="909.0" prefHeight="509.0" prefWidth="909.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="509.0" maxWidth="909.0" minHeight="509.0" minWidth="909.0" prefHeight="509.0" prefWidth="909.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="VsScene.VsController">
    <children>
       <ImageView blendMode="DARKEN" cache="true" fitHeight="509.0" fitWidth="909.0" layoutX="61.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@123999354-versus-vector-template-background-battle-or-competition-concept-template-red-and-white-players-video.jpg" />
          </image>
       </ImageView>
-      <Button defaultButton="true" layoutX="61.0" layoutY="80.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="175.0" style="-fx-background-color: #e60000; -fx-background-radius: 20px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="Computer" textFill="WHITE">
+      <Button defaultButton="true" onAction="#computerPlay" layoutX="61.0" layoutY="80.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="175.0" style="-fx-background-color: #e60000; -fx-background-radius: 20px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="Computer" textFill="WHITE">
          <font>
             <Font name="Bookman Old Style" size="26.0" />
          </font>
+         <!-- 
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
+         -->
       </Button>
-      <Button defaultButton="true" layoutX="728.0" layoutY="274.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="175.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="Another Player" textFill="#e60000" textOverrun="WORD_ELLIPSIS">
+      <Button defaultButton="true" onAction="#antherPlayer"  layoutX="728.0" layoutY="274.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="175.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="Another Player" textFill="#e60000" textOverrun="WORD_ELLIPSIS">
          <font>
             <Font name="Bookman Old Style Italic" size="20.0" />
          </font>
-         --> 
+         <!-- 
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

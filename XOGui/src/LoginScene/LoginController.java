@@ -54,6 +54,18 @@ public class LoginController implements Initializable {
             System.err.println("Error in Change Scence");
         }
     }
+        public void changeSceneServer() {
+        try{
+            Parent root = FXMLLoader.load(getClass().getResource("/ServerInterfaceScene/ServerInterfaceScene.fxml"));
+            Scene scene = new Scene(root);
+            Main.getMyStage().setScene(scene);
+            Main.getMyStage().setResizable(false);
+            Main.getMyStage().show();
+        }
+        catch(Exception IOException){
+            System.err.println("Error in Change Scence");
+        }
+    }
     public boolean networkLogin(String user_name,String password){
         
         boolean login=false; 
@@ -83,8 +95,6 @@ public class LoginController implements Initializable {
         }
         return login;
     }
-
-
     public void test(ActionEvent actionEvent) {
           if (PasswordBox.getText().equals("") || UserBox.getText().equals("")) {
                 Massage.setText("Check Your Fields");
@@ -99,10 +109,12 @@ public class LoginController implements Initializable {
                 networkLogin(UserBox.getText(), PasswordBox.getText());
             }
         } 
-    public void signUpButton(){
+    public void signUpButton(ActionEvent actionEvent){
         System.out.println("signUpButton");
         changeSceneSignUP();
     }
-
-
+    public void serverStatus(ActionEvent actionEvent){
+        System.out.println("Mina");
+        changeSceneServer();
+    }
 }
