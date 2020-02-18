@@ -5,22 +5,27 @@
  */
 package ServerImplementation;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.sql.SQLException;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import xo_game.DBManagment;
-import xo_game.SimpleUser;
 import xogameserver.interfaces.DualModeSetupInterface;
 
 /**
  *
  * @author nesreen
  */
-public class DualModeSetupImp implements DualModeSetupInterface{
+public class DualModeSetupImp extends UnicastRemoteObject implements DualModeSetupInterface{
     //DBManagment.connect();
+    
+    
+    public DualModeSetupImp() throws RemoteException { 
+        super(); 
+    }
+
     @Override
-    public Vector getStatusTable() {
+    public Vector getStatusTable() throws RemoteException {
         try {
             DBManagment dbm =   DBManagment.getInstance();
             return dbm.getAllUsersStatus();
