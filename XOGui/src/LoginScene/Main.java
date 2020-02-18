@@ -46,7 +46,7 @@ public class Main extends Application {
         }
         Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
         Scene scene = new Scene(root, 909, 509);
-         mediaplayer.play();
+//         mediaplayer.play();
         primaryStage.setTitle("TicTacToe");
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);
