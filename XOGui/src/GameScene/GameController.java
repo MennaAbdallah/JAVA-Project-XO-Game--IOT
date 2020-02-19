@@ -11,6 +11,11 @@ import javafx.scene.control.Label;
 import javafx.util.Duration;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+/**
+ *
+ * @author fegoo
+ */
 public class GameController implements Initializable {
     private static final Integer STARTTIME = 15;
     public Label timelabel;

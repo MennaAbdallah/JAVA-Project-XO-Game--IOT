@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
@@ -8,24 +10,24 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxWidth="909.0" minWidth="909.0" prefHeight="509.0" prefWidth="909.0" style="-fx-background-color: #F95A57;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ServerInterfaceScene.ServerOnlineListController">
+<AnchorPane maxWidth="909.0" minWidth="909.0" prefHeight="509.0" prefWidth="909.0" style="-fx-background-color: #FFD9A5;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ServerInterfaceScene.ServerOnlineListController">
    <children>
-      <AnchorPane layoutX="237.0" layoutY="37.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-radius: 30; -fx-background-color: #FFD9A5;" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="455.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="40.0">
+      <AnchorPane layoutX="496.0" layoutY="41.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-radius: 30; -fx-border-width: 4; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-color: #F95A57;" AnchorPane.bottomAnchor="39.0" AnchorPane.leftAnchor="496.0" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="41.0">
          <children>
-            <TextField fx:id="serverIPTF" alignment="CENTER" layoutX="60.0" layoutY="125.0" promptText="Server IP" AnchorPane.bottomAnchor="278.66666666666663" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" />
+            <TextField fx:id="serverIPTF" alignment="CENTER" layoutX="60.0" layoutY="157.0" promptText="Server IP" AnchorPane.bottomAnchor="247.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" />
             <TextField fx:id="serverPortTF" alignment="CENTER" layoutX="60.0" layoutY="188.0" promptText="Server Port" AnchorPane.bottomAnchor="215.66666666666666" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" />
-            <TextField fx:id="DBHostTF" alignment="CENTER" layoutX="60.0" layoutY="243.99999999999997" promptText="Database Host" AnchorPane.bottomAnchor="159.66666666666669" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" />
-            <TextField fx:id="DBPortTF" alignment="CENTER" layoutX="226.0" layoutY="261.0" promptText="Database Port" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" />
-            <ToggleButton fx:id="toogleBtn" layoutX="252.0" layoutY="318.0" mnemonicParsing="false" onMouseClicked="#connectClick" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-background-color: #F95A57;" text="Connect / Disconnect" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" />
-            <Label alignment="CENTER" layoutX="226.0" layoutY="53.0" prefHeight="43.0" prefWidth="520.0" style="-fx-text-fill: #F95A57;" text="Server" textFill="#f95a57" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0">
+            <ToggleButton fx:id="toogleBtn" layoutX="53.0" layoutY="354.0" mnemonicParsing="false" onMouseClicked="#connectClick" prefHeight="43.0" prefWidth="278.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-background-color: #353839;" text="Connect / Disconnect" textFill="WHITE" AnchorPane.bottomAnchor="32.0" AnchorPane.leftAnchor="53.0" AnchorPane.rightAnchor="53.0">
                <font>
-                  <Font name="System Bold" size="18.0" />
+                  <Font size="17.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></ToggleButton>
+            <Label alignment="CENTER" layoutX="226.0" layoutY="53.0" prefHeight="43.0" prefWidth="520.0" text="Server" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0">
+               <font>
+                  <Font name="System Bold" size="30.0" />
                </font>
             </Label>
-            <Label fx:id="serverIPErr" alignment="CENTER" layoutX="60.0" layoutY="161.0" style="-fx-text-fill: #F95A57;" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" />
-            <Label fx:id="serverPortErr" alignment="CENTER" layoutX="60.0" layoutY="222.0" style="-fx-text-fill: #F95A57;" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" />
-            <Label fx:id="DBHostErr" alignment="CENTER" layoutX="60.0" layoutY="280.0" style="-fx-text-fill: #F95A57;" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" />
-            <Label fx:id="DBPortErr" alignment="CENTER" layoutX="60.0" layoutY="337.0" style="-fx-text-fill: #F95A57;" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" />
          </children>
       </AnchorPane>
       <ImageView blendMode="DARKEN" fitHeight="169.0" fitWidth="179.0" layoutX="189.0" layoutY="86.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="189.0" AnchorPane.rightAnchor="551.0">
@@ -43,5 +45,17 @@
             <Image url="@o.png" />
          </image>
       </ImageView>
+      <Button fx:id="BackBtn" layoutX="15.0" layoutY="413.0" mnemonicParsing="false" onAction="#GoBack" prefHeight="56.0" prefWidth="165.0" style="-fx-background-color: #FFD9A5;">
+         <graphic>
+            <ImageView fitHeight="45.0" fitWidth="132.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@back.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </AnchorPane>
