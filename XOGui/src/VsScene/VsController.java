@@ -6,6 +6,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
+/**
+ *
+ * @author fegoo
+ */
 public class VsController {
     public void changeSceneComputerGame() {
         try{

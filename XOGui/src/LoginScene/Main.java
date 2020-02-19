@@ -1,6 +1,9 @@
 package LoginScene;
 
 import java.io.File;
+import xogameserver.interfaces.LoginInterface;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,6 +12,11 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import xogameserver.interfaces.SignUp;
+
+/**
+ *
+ * @author fegoo
+ */
 
 public class Main extends Application {
   
@@ -29,22 +37,23 @@ public class Main extends Application {
         myStage=primaryStage;
         System.out.println("First line");
         Rmi.connectedSevrver();
+
+
+
         Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
         Scene scene = new Scene(root, 909, 509);
-//         mediaplayer.play();
         primaryStage.setTitle("TicTacToe");
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);
         primaryStage.show();
+
     }
+
     public static void main(String[] args) {
         launch(args);
     }
     public static Stage getMyStage() {
         return myStage;
     }
+
 }
-
-
-
-

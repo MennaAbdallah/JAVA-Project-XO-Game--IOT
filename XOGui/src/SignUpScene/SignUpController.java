@@ -140,6 +140,12 @@ public class SignUpController implements Initializable {
         
         return false;
     }
+    
+    
+        public void GoBack(ActionEvent actionEvent){
+        System.out.println("Mina");
+        changeSceneLogin();
+    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

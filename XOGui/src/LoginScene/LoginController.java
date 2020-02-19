@@ -3,6 +3,7 @@ package LoginScene;
 import xogameserver.interfaces.LoginInterface;
 import DTO.SimpleUser;
 import RMI.Rmi;
+import java.io.File;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -18,14 +19,25 @@ import java.util.logging.Logger;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.ImageView;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+
+/**
+ *
+ * @author fegoo
+ */
 
 public class LoginController implements Initializable {
 
     private LoginInterface stub;
     public TextField UserBox;
+    public ImageView IMute;
+    public ImageView INoMute;
     public PasswordField PasswordBox;
     public Button LoginBtn;
     public Label Massage;
+    
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -33,6 +45,13 @@ public class LoginController implements Initializable {
             Massage.setText("Failure in Network");
             Massage.setVisible(true);
         }
+        
+        //MediaPlayer me  =MusicPlayer.getMediaplayer();
+        
+        if(MusicPlayer.getMediaplayer().getStatus()!=MediaPlayer.Status.PLAYING){
+            MusicPlayer.getMediaplayer().play();
+        }
+        
 
     }
 
@@ -75,13 +94,14 @@ public class LoginController implements Initializable {
     public boolean networkLogin(String user_name, String password) {
         boolean login = false;
         try {
-             // Getting the registry
+            // Getting the registry
             //Registry registry = LocateRegistry.getRegistry("127.0.0.1",5005);
             // Looking up the registry for the remote object
             //LoginInterface stub = (LoginInterface) registry.lookup("Hello");
             // Calling the remote method using the obtained object
 
             stub = Rmi.getStubLogin();
+            stub = Main.getStub();
             login = stub.login(user_name, password);
             System.out.println("Remote method invoked");
             if (login == true) {
@@ -121,6 +141,7 @@ public class LoginController implements Initializable {
     }
 
     public void signUpButton(ActionEvent actionEvent) {
+        
         System.out.println("signUpButton");
         if(Rmi.isConnected()==true){
             changeSceneSignUP();
@@ -135,4 +156,10 @@ public class LoginController implements Initializable {
     public void serverStatus(ActionEvent actionEvent) {
         changeSceneServer();
     }
+
+    public void musicControl(ActionEvent actionEvent) {
+        MusicPlayer.checkStatus(IMute, INoMute);
+
+    }
+
 }
