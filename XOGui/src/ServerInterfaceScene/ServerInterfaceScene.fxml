@@ -28,6 +28,11 @@
                   <Font name="System Bold" size="30.0" />
                </font>
             </Label>
+            <Label fx:id="serverIPErr" alignment="CENTER" layoutX="60.0" layoutY="161.0" style="-fx-text-fill: #F95A57;" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" />
+            <Label fx:id="serverPortErr" alignment="CENTER" layoutX="60.0" layoutY="222.0" style="-fx-text-fill: #F95A57;" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" />
+            <Label fx:id="DBHostErr" alignment="CENTER" layoutX="60.0" layoutY="280.0" style="-fx-text-fill: #F95A57;" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" />
+            <Label fx:id="DBPortErr" alignment="CENTER" layoutX="60.0" layoutY="337.0" style="-fx-text-fill: #F95A57;" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" />
+       
          </children>
       </AnchorPane>
       <ImageView blendMode="DARKEN" fitHeight="169.0" fitWidth="179.0" layoutX="189.0" layoutY="86.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="189.0" AnchorPane.rightAnchor="551.0">

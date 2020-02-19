@@ -1,5 +1,6 @@
 package LoginScene;
 
+import RMI.Rmi;
 import java.io.File;
 import xogameserver.interfaces.LoginInterface;
 import java.rmi.registry.LocateRegistry;

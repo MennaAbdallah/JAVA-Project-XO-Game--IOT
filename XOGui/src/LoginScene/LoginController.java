@@ -101,7 +101,6 @@ public class LoginController implements Initializable {
             // Calling the remote method using the obtained object
 
             stub = Rmi.getStubLogin();
-            stub = Main.getStub();
             login = stub.login(user_name, password);
             System.out.println("Remote method invoked");
             if (login == true) {

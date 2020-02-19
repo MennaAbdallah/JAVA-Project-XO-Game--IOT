@@ -30,7 +30,6 @@
             <Font name="Bookman Old Style Italic" size="20.0" />
          </font>
          <!-- 
-         --> 
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
