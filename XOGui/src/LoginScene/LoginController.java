@@ -2,6 +2,7 @@ package LoginScene;
 
 import xogameserver.interfaces.LoginInterface;
 import DTO.SimpleUser;
+import RMI.Rmi;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -19,6 +20,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 public class LoginController implements Initializable {
+
     private LoginInterface stub;
     public TextField UserBox;
     public PasswordField PasswordBox;
@@ -27,94 +29,110 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        if(Rmi.isConnected()==false) {
+            Massage.setText("Failure in Network");
+            Massage.setVisible(true);
+        }
 
+    }
 
-    }      
-  public void changeSceneVS() {
-        try{
+    public void changeSceneVS() {
+        try {
             Parent root = FXMLLoader.load(getClass().getResource("/VsScene/VsScence.fxml"));
             Main.getMyStage().setTitle("TicTacToe");
             Main.getMyStage().setResizable(false);
             Main.getMyStage().setScene(new Scene(root, 909, 509));
             Main.getMyStage().show();
-        }
-        catch(Exception IOException){
+        } catch (Exception IOException) {
             System.err.println("Error in Change Scence");
         }
     }
+
     public void changeSceneSignUP() {
-        try{
+        try {
             Parent root = FXMLLoader.load(getClass().getResource("/signupscene/Signup.fxml"));
             Scene scene = new Scene(root);
             Main.getMyStage().setScene(scene);
             Main.getMyStage().setResizable(false);
             Main.getMyStage().show();
-        }
-        catch(Exception IOException){
+        } catch (Exception IOException) {
             System.err.println("Error in Change Scence");
         }
     }
-        public void changeSceneServer() {
-        try{
+
+    public void changeSceneServer() {
+        try {
             Parent root = FXMLLoader.load(getClass().getResource("/ServerInterfaceScene/ServerInterfaceScene.fxml"));
             Scene scene = new Scene(root);
             Main.getMyStage().setScene(scene);
             Main.getMyStage().setResizable(false);
             Main.getMyStage().show();
-        }
-        catch(Exception IOException){
+        } catch (Exception IOException) {
             System.err.println("Error in Change Scence");
         }
     }
-    public boolean networkLogin(String user_name,String password){
-        
-        boolean login=false; 
+
+    public boolean networkLogin(String user_name, String password) {
+        boolean login = false;
         try {
              // Getting the registry
             //Registry registry = LocateRegistry.getRegistry("127.0.0.1",5005);
             // Looking up the registry for the remote object
             //LoginInterface stub = (LoginInterface) registry.lookup("Hello");
             // Calling the remote method using the obtained object
-            stub=Main.getStub();
-            login=stub.login(user_name,password);
-             System.out.println("Remote method invoked");
-            if(login==true){
-                SimpleUser s=stub.getuserData();
+
+            stub = Rmi.getStubLogin();
+            login = stub.login(user_name, password);
+            System.out.println("Remote method invoked");
+            if (login == true) {
+                SimpleUser s = stub.getuserData();
                 Massage.setVisible(false);
                 //changeSceneVS();
                 changeSceneVS();
-            }
-            else{
+            } else {
                 Massage.setText("User Name or Passaword incorrect");
                 Massage.setVisible(true);
-            
+
             }
         } catch (Exception e) {
             System.err.println("Client exception: " + e.toString());
             e.printStackTrace();
         }
+
         return login;
     }
+
     public void test(ActionEvent actionEvent) {
-          if (PasswordBox.getText().equals("") || UserBox.getText().equals("")) {
+        if (Rmi.isConnected() == true) {
+            if (PasswordBox.getText().equals("") || UserBox.getText().equals("")) {
                 Massage.setText("Check Your Fields");
                 Massage.setVisible(true);
-            }
-          else if (PasswordBox.getLength() <8)
-          { System.out.println(PasswordBox.getLength());
-              Massage.setText("Your password is less than 8 ");
-              Massage.setVisible(true);
-          }
-          else {
+            } else if (PasswordBox.getLength() < 8) {
+                System.out.println(PasswordBox.getLength());
+                Massage.setText("Your password is less than 8 ");
+                Massage.setVisible(true);
+            } else {
                 networkLogin(UserBox.getText(), PasswordBox.getText());
             }
-        } 
-    public void signUpButton(ActionEvent actionEvent){
-        System.out.println("signUpButton");
-        changeSceneSignUP();
+        } else {
+            Massage.setText("Failure in Network");
+            Massage.setVisible(true);
+        }
     }
-    public void serverStatus(ActionEvent actionEvent){
-        System.out.println("Mina");
+
+    public void signUpButton(ActionEvent actionEvent) {
+        System.out.println("signUpButton");
+        if(Rmi.isConnected()==true){
+            changeSceneSignUP();
+        }
+        else{
+            Massage.setText("Failure in Network");
+            Massage.setVisible(true);
+        }
+        
+    }
+
+    public void serverStatus(ActionEvent actionEvent) {
         changeSceneServer();
     }
 }

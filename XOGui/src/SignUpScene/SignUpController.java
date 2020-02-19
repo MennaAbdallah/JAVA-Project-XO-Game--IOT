@@ -8,6 +8,7 @@ package signupscene;
 import DTO.SimpleUser;
 import DTO.User;
 import LoginScene.Main;
+import RMI.Rmi;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -123,7 +124,7 @@ public class SignUpController implements Initializable {
                   System.out.println("Email : "+emailTF.getText()+" , Pass : "+passwordTF.getText()+" , Name : "
                             +nameTF.getText()+" , NName : "+nickNameTF.getText());
                     System.out.println(user.toString());
-                  boolean check=Main.getStubSignUp().signUp(user);
+                  boolean check=Rmi.getStubSignUp().signUp(user);
                   if(check==true){
                       changeSceneLogin();
                   }
