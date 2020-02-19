@@ -17,6 +17,9 @@ import xogameserver.interfaces.LoginInterface;
 /**
  *
  * @author fegoo
+/**
+ *
+ * @author mashael
  */
 public class XoGameServer {
 

@@ -5,6 +5,8 @@
  * and open the template in the editor.
  */
 
+package xo_game;
+
 /**
  *
  * @author mashael

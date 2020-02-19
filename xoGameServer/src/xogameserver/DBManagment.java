@@ -116,12 +116,13 @@ public class DBManagment {
     public static String getDBPass() {
         return dbPass;
     }
+    
 
-    public int getScore(int id) {
+    public int getScore(int id){
         try {
             PreparedStatement stmt = c.prepareStatement("SELECT score FROM user where id = ?;",
                     ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            stmt.setInt(1, id);
+            stmt.setInt(1, id);            
             ResultSet rs = stmt.executeQuery();
             rs.first();
             return rs.getInt("score");
@@ -130,14 +131,14 @@ public class DBManagment {
         }
         return -1;
     }
-
-    public boolean setScore(int id, int newScore) {
-
+    
+    public boolean setScore(int id, int newScore){
+        
         try {
             PreparedStatement stmt = c.prepareStatement("UPDATE user SET score = ? where id = ?;",
                     ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             stmt.setInt(1, newScore);
-            stmt.setInt(2, id);
+            stmt.setInt(2, id);            
             int rs = stmt.executeUpdate();
             return rs > 0;
         } catch (SQLException ex) {
