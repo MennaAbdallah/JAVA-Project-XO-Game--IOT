@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="257.0" prefWidth="628.0" style="-fx-background-color: #FFD9A5;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView blendMode="DARKEN" fitHeight="228.0" fitWidth="605.0" layoutX="12.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../output-onlinepngtools.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

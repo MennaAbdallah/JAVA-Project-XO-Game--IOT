@@ -13,16 +13,16 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author menna
+ * @author fegoo
  */
 public class OnlineMenu extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("OnlineMenu.fxml"));
         
         Scene scene = new Scene(root);
-        
+         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
     }

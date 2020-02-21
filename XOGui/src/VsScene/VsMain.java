@@ -15,7 +15,7 @@ public class VsMain extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("VsScence.fxml"));
         primaryStage.setTitle("TicTacToe");
         primaryStage.setResizable(false);
         primaryStage.setScene(new Scene(root, 909, 509));

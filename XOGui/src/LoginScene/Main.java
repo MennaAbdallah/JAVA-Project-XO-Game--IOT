@@ -22,6 +22,7 @@ import xogameserver.interfaces.SignUp;
 public class Main extends Application {
   
    public static Stage myStage;
+   public static Parent root;
    public static boolean connected;
 //      Main(){
 //          connected=false;
@@ -29,19 +30,14 @@ public class Main extends Application {
 //          Rmi.setPort(5005);
 //        }
     
-        String path ="C:\\Users\\fegoo\\Desktop\\JAVA-Project-XO-Game--IOT\\XOGui\\src\\Song1.mp3";
-    Media media = new Media (new File (path).toURI().toString());
-    MediaPlayer mediaplayer = new MediaPlayer(media);
+
 
     @Override
     public void start(Stage primaryStage) throws Exception{
         myStage=primaryStage;
         System.out.println("First line");
         Rmi.connectedSevrver();
-
-
-
-        Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+         root = FXMLLoader.load(getClass().getResource("login.fxml"));
         Scene scene = new Scene(root, 909, 509);
         primaryStage.setTitle("TicTacToe");
         primaryStage.setResizable(false);
