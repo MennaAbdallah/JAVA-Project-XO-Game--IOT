@@ -9,8 +9,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="509.0" prefWidth="909.0" style="-fx-background-color: #FFD9A5;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="signupscene.SignUpController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="509.0" prefWidth="909.0" style="-fx-background-color: #FFD9A5;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SignUpScene.SignUpController">
    <children>
       <AnchorPane layoutX="489.0" layoutY="40.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #F95A57; -fx-border-width: 4; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-radius: 30;" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="489.0" AnchorPane.rightAnchor="36.0" AnchorPane.topAnchor="40.0">
          <children>

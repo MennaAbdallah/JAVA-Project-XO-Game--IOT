@@ -5,8 +5,13 @@
  */
 package RMI;
 
+import DTO.ClientClass;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.rmi.server.RemoteStub;
+import java.rmi.server.UnicastRemoteObject;
+import xogameserver.interfaces.ClientIF;
+import xogameserver.interfaces.Invitation;
 import xogameserver.interfaces.LoginInterface;
 import xogameserver.interfaces.SignUp;
 
@@ -17,22 +22,36 @@ import xogameserver.interfaces.SignUp;
 public class Rmi {
     private static LoginInterface stub;
     private static SignUp stub2;
-    private static String ip="127.0.0.1.2";
-    private static int port=50051;
+    private static Invitation invStub;
+    private static String ip="127.0.0.1";
+    private static int port=5010;
     private static boolean connected=false;
+    
+    
     public static LoginInterface getStubLogin() {
         return stub;
     }
+    
     public static SignUp getStubSignUp() {
         return stub2;
     }
+    
+    public static Invitation getInvStub() {
+        return invStub;
+    }   
+    
     public static void setStubLogin(LoginInterface s) {
          stub=s;
     }
+    
     public static void setStubSignUp(SignUp s) {
          stub2=s;
     }
-
+    
+    public static void setInvStub(Invitation invStub) {
+        Rmi.invStub = invStub;
+    }
+    
     public static String getIp() {
         return ip;
     }
@@ -69,8 +88,10 @@ public class Rmi {
                  Registry registry = LocateRegistry.getRegistry(Rmi.getIp(),Rmi.getPort());
                  //Registry registry = LocateRegistry.getRegistry("192.168.1.5",5030);
                  // Looking up the registry for the remote object
+
                  setStubLogin((LoginInterface) registry.lookup("login"));
                  setStubSignUp((SignUp) registry.lookup("signup"));
+                 setInvStub((Invitation) registry.lookup("invitation"));
                 // Calling the remote method using the obtained object
                  connected=true;
             }

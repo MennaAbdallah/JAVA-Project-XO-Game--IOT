@@ -11,12 +11,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import xogameserver.interfaces.Invitation;
 
 /**
  *
  * @author menna
  */
 public class OnlineMenuController implements Initializable {
+    
+    private Invitation stub;
     
     @FXML
     private Label label;

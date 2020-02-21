@@ -10,6 +10,8 @@ import DTO.SimpleUser;
 import DTO.User;
 import java.rmi.server.UnicastRemoteObject;
 import xogameserver.DBManagment;
+import xogameserver.XoGameServer;
+import xogameserver.interfaces.ClientIF;
 import xogameserver.interfaces.LoginInterface;
 
 /**
@@ -23,27 +25,25 @@ public class LoginImplem extends UnicastRemoteObject implements LoginInterface {
 
     int loginId;
 
-    public LoginImplem() throws RemoteException {
-    }
+    public LoginImplem() throws RemoteException { }
 
     @Override
     public boolean login(String username, String pass) throws RemoteException {
 
         loginUser.setUserName(username);
         loginUser.setPassword(pass);
-        System.out.println(loginUser.getUserName());
-        loginId = db.logIn(loginUser);
 
+        loginId = db.logIn(loginUser);
+        
         if (loginId > 0) {
             return true;
         } else {
             return false;
         }
-
     }
 
     @Override
-    public SimpleUser getuserData() {
+    public SimpleUser getuserData() throws RemoteException {
 
         loginUser = db.getUser(loginId);
 
@@ -51,4 +51,11 @@ public class LoginImplem extends UnicastRemoteObject implements LoginInterface {
 
     }
 
+    @Override
+    public void registerClient(ClientIF clientRef) throws RemoteException{
+        System.out.println(clientRef.hashCode());
+        XoGameServer.connectedClients.put(loginId, clientRef);
+//                clientRef.rcvInvitation();
+        System.out.println("new refrence is added to server"); 
+    }
 }

@@ -1,5 +1,6 @@
 package LoginScene;
 
+import DTO.ClientClass;
 import xogameserver.interfaces.LoginInterface;
 import DTO.SimpleUser;
 import RMI.Rmi;
@@ -13,6 +14,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,41 +25,68 @@ import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import xogameserver.interfaces.ClientIF;
+import xogameserver.interfaces.Invitation;
 
 /**
  *
  * @author fegoo
  */
-
 public class LoginController implements Initializable {
 
     private LoginInterface stub;
+    private Invitation invStub;
     public TextField UserBox;
     public ImageView IMute;
     public ImageView INoMute;
     public PasswordField PasswordBox;
     public Button LoginBtn;
     public Label Massage;
-    
 
+    public static SimpleUser myData;
+    public static ClientIF myRef;
+
+//    public void setMyData(SimpleUser myData) {
+//        this.myData = myData;
+//    }
+//
+//    public SimpleUser getMyData() {
+//        return myData;
+//    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        if(Rmi.isConnected()==false) {
+        if (Rmi.isConnected() == false) {
             Massage.setText("Failure in Network");
             Massage.setVisible(true);
         }
-        
+
         //MediaPlayer me  =MusicPlayer.getMediaplayer();
-        
-        if(MusicPlayer.getMediaplayer().getStatus()!=MediaPlayer.Status.PLAYING){
-            MusicPlayer.getMediaplayer().play();
-        }
-        
+//        if(MusicPlayer.getMediaplayer().getStatus()!=MediaPlayer.Status.PLAYING){
+//            MusicPlayer.getMediaplayer().play();
+//        }
+    }
+
+    public void rcvInviteThread() {        
+        invStub = Rmi.getInvStub();
+        new Thread(() -> {
+            while (true) {
+                try {
+                    myRef = invStub.changeStatus(myData.getId());
+                    int senderId = myRef.checkNewInvivtation();
+                    if (senderId != 0) {
+                        System.out.println(senderId + " sent me invitation");                        
+                    }
+                } catch (RemoteException e) {
+                    System.err.println("Client exception: " + e.toString());
+                }
+            }
+        }).start();
 
     }
 
     public void changeSceneVS() {
         try {
+            rcvInviteThread();
             Parent root = FXMLLoader.load(getClass().getResource("/VsScene/VsScence.fxml"));
             Main.getMyStage().setTitle("TicTacToe");
             Main.getMyStage().setResizable(false);
@@ -69,7 +99,7 @@ public class LoginController implements Initializable {
 
     public void changeSceneSignUP() {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/signupscene/Signup.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/SignUpScene/Signup.fxml"));
             Scene scene = new Scene(root);
             Main.getMyStage().setScene(scene);
             Main.getMyStage().setResizable(false);
@@ -94,19 +124,18 @@ public class LoginController implements Initializable {
     public boolean networkLogin(String user_name, String password) {
         boolean login = false;
         try {
-            // Getting the registry
-            //Registry registry = LocateRegistry.getRegistry("127.0.0.1",5005);
-            // Looking up the registry for the remote object
-            //LoginInterface stub = (LoginInterface) registry.lookup("Hello");
-            // Calling the remote method using the obtained object
 
             stub = Rmi.getStubLogin();
             login = stub.login(user_name, password);
             System.out.println("Remote method invoked");
             if (login == true) {
-                SimpleUser s = stub.getuserData();
+                myData = stub.getuserData();
+
+                myRef = new ClientClass();
+                System.out.println(myRef.hashCode());
+                stub.registerClient(myRef);
+
                 Massage.setVisible(false);
-                //changeSceneVS();
                 changeSceneVS();
             } else {
                 Massage.setText("User Name or Passaword incorrect");
@@ -140,16 +169,15 @@ public class LoginController implements Initializable {
     }
 
     public void signUpButton(ActionEvent actionEvent) {
-        
+
         System.out.println("signUpButton");
-        if(Rmi.isConnected()==true){
+        if (Rmi.isConnected() == true) {
             changeSceneSignUP();
-        }
-        else{
+        } else {
             Massage.setText("Failure in Network");
             Massage.setVisible(true);
         }
-        
+
     }
 
     public void serverStatus(ActionEvent actionEvent) {

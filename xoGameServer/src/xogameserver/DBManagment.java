@@ -24,7 +24,7 @@ public class DBManagment {
 
     private static DBManagment dbm = null;
     private static Connection c = null;
-    private static String dbPort = "3307";
+    private static String dbPort = "3306";
     private static String dbDriver = "com.mysql.jdbc.Driver";
     private static String dbUser = "root";
     private static String dbPass = "";
@@ -33,7 +33,7 @@ public class DBManagment {
 
         try {
             Class.forName(dbDriver).newInstance();
-            c = DriverManager.getConnection("jdbc:mysql://localhost:" + dbPort + "/XoGameDB", dbUser, dbPass);
+            c = DriverManager.getConnection("jdbc:mysql://localhost:" + dbPort + "/javaGame", dbUser, dbPass);
             System.out.println("db connected");
         } catch (InstantiationException | IllegalAccessException ex) {
             Logger.getLogger(DBManagment.class.getName()).log(Level.SEVERE, null, ex);
@@ -52,20 +52,6 @@ public class DBManagment {
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(DBManagment.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        /*try {
-         DBManagment dbm = new DBManagment();
-         User user = dbm.getUser(2);
-         System.out.println(user.toString());
-         user.setStatus(2);
-         System.out.println(dbm.setStatus(user.getId(), user.getStatus()));
-         System.out.println(dbm.getStatus(user.getId()).toString());
-         System.out.println(dbm.setPassword(user.getId(), "test2"));
-         } catch (SQLException ex) {
-         Logger.getLogger(DBManagment.class.getName()).log(Level.SEVERE, null, ex);
-         } catch (ClassNotFoundException ex) {
-         Logger.getLogger(DBManagment.class.getName()).log(Level.SEVERE, null, ex);
-         }*/
     }
     ///////////////////////////
 

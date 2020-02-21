@@ -23,15 +23,16 @@ public class Main extends Application {
   
    public static Stage myStage;
    public static boolean connected;
+   
 //      Main(){
 //          connected=false;
 //          Rmi.setIp("127.0.0.1");
 //          Rmi.setPort(5005);
 //        }
     
-        String path ="C:\\Users\\fegoo\\Desktop\\JAVA-Project-XO-Game--IOT\\XOGui\\src\\Song1.mp3";
-    Media media = new Media (new File (path).toURI().toString());
-    MediaPlayer mediaplayer = new MediaPlayer(media);
+//    String path ="./src/Song1.mp3";
+//    Media media = new Media (new File (path).toURI().toString());
+//    MediaPlayer mediaplayer = new MediaPlayer(media);
 
     @Override
     public void start(Stage primaryStage) throws Exception{

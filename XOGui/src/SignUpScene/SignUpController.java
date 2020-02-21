@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package signupscene;
+package SignUpScene;
 
 import DTO.SimpleUser;
 import DTO.User;
@@ -39,7 +39,6 @@ public class SignUpController implements Initializable {
     @FXML
     private PasswordField passwordTF, confirmPasswordTF;
     private LoginInterface stub;
-
 
     @FXML
     private void signUpClick(ActionEvent event) {
@@ -88,64 +87,63 @@ public class SignUpController implements Initializable {
         }
         networkSignUp(flag);
     }
+
     public void changeSceneVS() {
-        try{
+        try {
             Parent root = FXMLLoader.load(getClass().getResource("/VsScene/VsScence.fxml"));
             Main.getMyStage().setTitle("TicTacToe");
             Main.getMyStage().setResizable(false);
             Main.getMyStage().setScene(new Scene(root, 909, 509));
             Main.getMyStage().show();
-        }
-        catch(Exception IOException){
+        } catch (Exception IOException) {
             System.err.println("Error in Change Scence");
         }
     }
-      public void changeSceneLogin() {
-        try{
-                Parent root = FXMLLoader.load(getClass().getResource("/LoginScene/login.fxml"));
-                Scene scene = new Scene(root, 909, 509);
-                Main.getMyStage().setTitle("TicTacToe");
-                Main.getMyStage().setResizable(false);
-                Main.getMyStage().setScene(scene);
-                Main.getMyStage().show();
-        }
-        catch(Exception IOException){
+
+    public void changeSceneLogin() {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/LoginScene/login.fxml"));
+            Scene scene = new Scene(root, 909, 509);
+            Main.getMyStage().setTitle("TicTacToe");
+            Main.getMyStage().setResizable(false);
+            Main.getMyStage().setScene(scene);
+            Main.getMyStage().show();
+        } catch (Exception IOException) {
             System.err.println("Error in Change Scence");
         }
     }
-    public boolean networkSignUp(boolean flag){
-        try{
-                if(flag==true){
-                  User user=new User();
-                  user.setEmail(emailTF.getText());
-                  user.setPassword(passwordTF.getText());
-                  user.setUserName(nameTF.getText());
-                  user.setNickName(nickNameTF.getText()); 
-                  System.out.println("Email : "+emailTF.getText()+" , Pass : "+passwordTF.getText()+" , Name : "
-                            +nameTF.getText()+" , NName : "+nickNameTF.getText());
-                    System.out.println(user.toString());
-                  boolean check=Rmi.getStubSignUp().signUp(user);
-                  if(check==true){
-                      changeSceneLogin();
-                  }
+
+    public boolean networkSignUp(boolean flag) {
+        try {
+            if (flag == true) {
+                User user = new User();
+                user.setEmail(emailTF.getText());
+                user.setPassword(passwordTF.getText());
+                user.setUserName(nameTF.getText());
+                user.setNickName(nickNameTF.getText());
+                System.out.println("Email : " + emailTF.getText() + " , Pass : " + passwordTF.getText() + " , Name : "
+                        + nameTF.getText() + " , NName : " + nickNameTF.getText());
+                System.out.println(user.toString());
+                boolean check = Rmi.getStubSignUp().signUp(user);
+                System.out.println("true signUp result from DB");
+                if (check == true) {                    
+                    changeSceneLogin();
+                }
+            } else {
+                System.out.println("Error in Signup Menu");
             }
-            else{
-                    System.out.println("Error in Signup Menu");
-            }
+        } catch (Exception RemoteException) {
+            System.err.println("Error From Connection Stub2");
         }
-        catch(Exception RemoteException){
-                    System.err.println("Error From Connection Stub2");
-        }
-       
-        
+
         return false;
     }
-    
-    
-        public void GoBack(ActionEvent actionEvent){
+
+    public void GoBack(ActionEvent actionEvent) {
         System.out.println("Mina");
         changeSceneLogin();
     }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
