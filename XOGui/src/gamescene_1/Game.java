@@ -140,7 +140,7 @@ public class Game {
     }
 
     
-    private static XYReplication getXYofMove(int cellNumber) {
+    public static XYReplication getXYofMove(int cellNumber) {
         int x = 0;
         int y = 0;
 

@@ -37,9 +37,23 @@ public class VsController {
             System.err.println("Error in Change Scence");
         }
     }
+        public void changeSceneGameOnline() {
+        try{
+        Parent root = FXMLLoader.load(getClass().getResource("/GameOnline/GameScene.fxml"));
+        Main.getMyStage().setTitle("TicTacToe");
+        Main.getMyStage().setResizable(false);
+        Main.getMyStage().setScene(new Scene(root, 909, 509));
+        Main.getMyStage().show();
+     
+        }
+        catch(Exception IOException){
+            System.err.println("Error in Change Scence");
+        }
+    }
     public void antherPlayer(ActionEvent actionEvent){
         System.out.println("Test");
-        changeSceneOnlineList();
+        //changeSceneOnlineList();
+        changeSceneGameOnline();
             
     }
     public void computerPlay(ActionEvent actionEvent){

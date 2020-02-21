@@ -7,6 +7,7 @@ package RMI;
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import xogameserver.interfaces.GameInterface;
 import xogameserver.interfaces.LoginInterface;
 import xogameserver.interfaces.SignUp;
 
@@ -17,8 +18,9 @@ import xogameserver.interfaces.SignUp;
 public class Rmi {
     private static LoginInterface stub;
     private static SignUp stub2;
-    private static String ip="127.0.0.1.2";
-    private static int port=50051;
+    private static GameInterface stubGame;
+    private static String ip="192.168.1.8";
+    private static int port=5000;
     private static boolean connected=false;
     public static LoginInterface getStubLogin() {
         return stub;
@@ -33,6 +35,27 @@ public class Rmi {
          stub2=s;
     }
 
+    public static void setStub2(SignUp stub2) {
+        Rmi.stub2 = stub2;
+    }
+
+    public static LoginInterface getStub() {
+        return stub;
+    }
+
+    public static SignUp getStub2() {
+        return stub2;
+    }
+    
+
+    public static void setstubGame(GameInterface stubGame) {
+        Rmi.stubGame = stubGame;
+    }
+    
+    public static GameInterface getstubGame() {
+        return stubGame;
+    }
+    
     public static String getIp() {
         return ip;
     }
@@ -58,19 +81,20 @@ public class Rmi {
     }
     public static boolean connectedSevrver(){
                 try {
-                /*System.setProperty("java.security.policy","file:E:/security.policy");
+                System.setProperty("java.security.policy","file:E:/security.policy");
                 if (System.getSecurityManager() == null)
                 {
                     System.setSecurityManager(new SecurityManager());
-                }*/
+                }
                 // Getting the registry
                 //Rmi.setIp("127.0.0.1");
                 //Rmi.setPort(5005);
                  Registry registry = LocateRegistry.getRegistry(Rmi.getIp(),Rmi.getPort());
                  //Registry registry = LocateRegistry.getRegistry("192.168.1.5",5030);
                  // Looking up the registry for the remote object
-                 setStubLogin((LoginInterface) registry.lookup("login"));
-                 setStubSignUp((SignUp) registry.lookup("signup"));
+                    //     setStubLogin((LoginInterface) registry.lookup("login"));
+                    //   setStubSignUp((SignUp) registry.lookup("signup"));
+                 setstubGame((GameInterface) registry.lookup("game"));
                 // Calling the remote method using the obtained object
                  connected=true;
             }

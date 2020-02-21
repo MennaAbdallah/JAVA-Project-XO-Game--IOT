@@ -17,11 +17,13 @@ import javafx.scene.media.MediaPlayer;
  * @author fegoo
  */
 public class MusicPlayer {
-
+   static final  String path = "E:\\ITI intake 40\\19-Java\\Java_Project\\JAVA-Project-XO-Game--IOT\\XOGui\\srcsrc\\Song1.mp3";
+   static final  Media media = new Media(new File(path).toURI().toString());
+   static MediaPlayer mediaplayer =null;
+   
     public static MediaPlayer getMediaplayer() {
         if(mediaplayer ==null)
         {
-            
             mediaplayer= new MediaPlayer (media);
         }
         return mediaplayer;
@@ -42,9 +44,5 @@ public class MusicPlayer {
             INoMute.setVisible(true);
         }
     }
-    
-      static final  String path = "C:\\Users\\fegoo\\Desktop\\JAVA-Project-XO-Game--IOT\\XOGui\\src\\Song1.mp3";
-   static final  Media media = new Media(new File(path).toURI().toString());
-    static MediaPlayer mediaplayer =null;
     
 }
