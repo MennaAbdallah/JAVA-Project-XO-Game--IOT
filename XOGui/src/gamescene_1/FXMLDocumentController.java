@@ -58,7 +58,7 @@ public class FXMLDocumentController implements Initializable {
         {
             game.insertMoveXY(0, 0, -1);
             lbl00.setText("O");
-            ((Button)event.getSource()).setDisable(true);
+            ((Button)event.getSource()).setOnMouseClicked(null);
             playAi();
         }
     }
@@ -71,7 +71,7 @@ public class FXMLDocumentController implements Initializable {
         {
             game.insertMoveXY(0, 1, -1);
             lbl01.setText("O");
-            ((Button)event.getSource()).setDisable(true);
+            ((Button)event.getSource()).setOnMouseClicked(null);
             playAi();
         }
     }
@@ -85,7 +85,7 @@ public class FXMLDocumentController implements Initializable {
         {
             game.insertMoveXY(0, 2, -1);
             lbl02.setText("O");
-            ((Button)event.getSource()).setDisable(true);
+            ((Button)event.getSource()).setOnMouseClicked(null);
             playAi();
         }
     }
@@ -98,7 +98,7 @@ public class FXMLDocumentController implements Initializable {
         {
             game.insertMoveXY(1, 0, -1);
             lbl10.setText("O");
-            ((Button)event.getSource()).setDisable(true);
+            ((Button)event.getSource()).setOnMouseClicked(null);
             playAi();
         }
     }
@@ -111,7 +111,7 @@ public class FXMLDocumentController implements Initializable {
         {
             game.insertMoveXY(1, 1, -1);
             lbl11.setText("O");
-            ((Button)event.getSource()).setDisable(true);
+            ((Button)event.getSource()).setOnMouseClicked(null);
             playAi();
         }
     }
@@ -124,7 +124,7 @@ public class FXMLDocumentController implements Initializable {
         {
             game.insertMoveXY(1, 2, -1);
             lbl12.setText("O");
-            ((Button)event.getSource()).setDisable(true);
+            ((Button)event.getSource()).setOnMouseClicked(null);
             playAi();
         }
     }
@@ -137,7 +137,7 @@ public class FXMLDocumentController implements Initializable {
         {
             game.insertMoveXY(2, 0, -1);
             lbl20.setText("O");
-            ((Button)event.getSource()).setDisable(true);
+            ((Button)event.getSource()).setOnMouseClicked(null);
             playAi();
         }
     }
@@ -150,7 +150,7 @@ public class FXMLDocumentController implements Initializable {
         {
             game.insertMoveXY(2, 1, -1);
             lbl21.setText("O");
-            ((Button)event.getSource()).setDisable(true);
+            ((Button)event.getSource()).setOnMouseClicked(null);
             playAi();
         }
     }
@@ -163,7 +163,7 @@ public class FXMLDocumentController implements Initializable {
         {
             game.insertMoveXY(2, 2, -1);
             lbl22.setText("O");
-            ((Button)event.getSource()).setDisable(true);
+            ((Button)event.getSource()).setOnMouseClicked(null);
             playAi();
         }
     }
@@ -178,47 +178,47 @@ public class FXMLDocumentController implements Initializable {
             if (bestMove.row == 0 && bestMove.col == 0)
             {
                 lbl00.setText("X");
-                button00.setDisable(true);
+                button00.setOnMouseClicked(null);
             }
             else if (bestMove.row == 1 && bestMove.col == 0)
             {
                 lbl10.setText("X");
-                button10.setDisable(true);
+                button10.setOnMouseClicked(null);
             }
             else if (bestMove.row == 2 && bestMove.col == 0)
             {
                 lbl20.setText("X");
-                button20.setDisable(true);
+                button20.setOnMouseClicked(null);
             }
             else if (bestMove.row == 0 && bestMove.col == 1)
             {
                 lbl01.setText("X");
-                button01.setDisable(true);
+                button01.setOnMouseClicked(null);
             }
             else if (bestMove.row == 1 && bestMove.col == 1)
             {
                 lbl11.setText("X");
-                button11.setDisable(true);
+                button11.setOnMouseClicked(null);
             }
             else if (bestMove.row == 2 && bestMove.col == 1)
             {
                 lbl21.setText("X");
-                button21.setDisable(true);
+                button21.setOnMouseClicked(null);
             }
             else if (bestMove.row == 0 && bestMove.col == 2)
             {
                 lbl02.setText("X");
-                button02.setDisable(true);
+                button02.setOnMouseClicked(null);
             }
             else if (bestMove.row == 1 && bestMove.col == 2)
             {
                 lbl12.setText("X");
-                button12.setDisable(true);
+                button12.setOnMouseClicked(null);
             }
             else if (bestMove.row == 2 && bestMove.col == 2)
             {
                 lbl22.setText("X");
-                button22.setDisable(true);
+                button22.setOnMouseClicked(null);
             }
             else
             {

@@ -46,12 +46,12 @@ public class LoginController implements Initializable {
             Massage.setVisible(true);
         }
         
-        //MediaPlayer me  =MusicPlayer.getMediaplayer();
+        MediaPlayer me  =MusicPlayer.getMediaplayer();
         
-        /*if(MusicPlayer.getMediaplayer().getStatus()!= MediaPlayer.Status.PLAYING){ 
+        if(MusicPlayer.getMediaplayer().getStatus()!= MediaPlayer.Status.PLAYING){ 
             MusicPlayer.getMediaplayer().play();
         }
-        */
+        
 
     }
 

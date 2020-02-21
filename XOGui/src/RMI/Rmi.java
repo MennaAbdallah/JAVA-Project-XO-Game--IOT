@@ -20,7 +20,7 @@ public class Rmi {
     private static SignUp stub2;
     private static GameInterface stubGame;
     private static String ip="192.168.1.8";
-    private static int port=5000;
+    private static int port=5100;
     private static boolean connected=false;
     public static LoginInterface getStubLogin() {
         return stub;
@@ -81,7 +81,7 @@ public class Rmi {
     }
     public static boolean connectedSevrver(){
                 try {
-                System.setProperty("java.security.policy","file:E:/security.policy");
+                System.setProperty("java.security.policy","file:src/RMI/security.policy");
                 if (System.getSecurityManager() == null)
                 {
                     System.setSecurityManager(new SecurityManager());
@@ -92,8 +92,8 @@ public class Rmi {
                  Registry registry = LocateRegistry.getRegistry(Rmi.getIp(),Rmi.getPort());
                  //Registry registry = LocateRegistry.getRegistry("192.168.1.5",5030);
                  // Looking up the registry for the remote object
-                    //     setStubLogin((LoginInterface) registry.lookup("login"));
-                    //   setStubSignUp((SignUp) registry.lookup("signup"));
+                  setStubLogin((LoginInterface) registry.lookup("login"));
+                  setStubSignUp((SignUp) registry.lookup("signup"));
                  setstubGame((GameInterface) registry.lookup("game"));
                 // Calling the remote method using the obtained object
                  connected=true;

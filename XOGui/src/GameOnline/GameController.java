@@ -113,24 +113,29 @@ public class GameController implements Initializable {
 
                 } else {
                     while (true) {
+                        if (game.hasWinner() != 0 || game.isGameOver()) {
+                            break;
+                        }
                         try {
                             gamePlayRecieve = Rmi.getstubGame().getPlay();
                         } catch (RemoteException ex) {
                             Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
                         }
                         if (gameID == gamePlayRecieve.getGameID() && playerID != gamePlayRecieve.getPlayerID()) {
-                           Platform.runLater(() -> {        
-                            if (type == 1) {
-                                game.insertMove(gamePlayRecieve.getNewPlace(), -1);
-                                labelsHash.get(gamePlayRecieve.getNewPlace()).setText("o");
-                                System.out.println("o");
-                            } else {
-                                game.insertMove(gamePlayRecieve.getNewPlace(), 1);
-                                labelsHash.get(gamePlayRecieve.getNewPlace()).setText("x");
-                                System.out.println("x");
-                            }
-                           });
-                           break;
+
+                            Platform.runLater(() -> {
+                                if (type == 1) {
+                                    game.insertMove(gamePlayRecieve.getNewPlace(), -1);
+                                    labelsHash.get(gamePlayRecieve.getNewPlace()).setText("o");
+                                    System.out.println("o");
+                                } else {
+                                    game.insertMove(gamePlayRecieve.getNewPlace(), 1);
+                                    labelsHash.get(gamePlayRecieve.getNewPlace()).setText("x");
+                                    System.out.println("x");
+                                }
+                            });
+
+                            break;
                         }
 
                     }
@@ -209,6 +214,12 @@ public class GameController implements Initializable {
         eventButton = event;
     }
 
+    @FXML
+
+    public void Send(ActionEvent actionEvent) {
+
+    }
+
     public void start(ActionEvent actionEvent) {
         if (timeline != null) {
             timeline.stop();
@@ -221,30 +232,4 @@ public class GameController implements Initializable {
         timeline.playFromStart();
     }
 
-    private static int getXYofMove(int x, int y) {
-
-        int cellNumber = 0;
-
-        if (x == 0 && y == 0) {
-            return 1;
-        } else if (x == 0 && y == 1) {
-            return 2;
-        } else if (x == 0 && y == 2) {
-            return 3;
-        } else if (x == 1 && y == 0) {
-            return 4;
-        } else if (x == 1 && y == 1) {
-            return 5;
-        } else if (x == 1 && y == 2) {
-            return 6;
-        } else if (x == 2 && y == 0) {
-            return 7;
-        } else if (x == 2 && y == 1) {
-            return 8;
-        } else if (x == 2 && y == 2) {
-            return 9;
-        }
-
-        return cellNumber;
-    }
 }
