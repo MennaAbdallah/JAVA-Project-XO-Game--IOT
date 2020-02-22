@@ -5,9 +5,14 @@
  */
 package InvationScene;
 
+import DTO.SimpleUser;
 import LoginScene.LoginController;
+import RMI.Rmi;
 import java.net.URL;
+import java.rmi.RemoteException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,6 +20,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import xogameserver.interfaces.Invitation;
 
 /**
  *
@@ -24,6 +30,8 @@ public class FXMLDocumentController implements Initializable {
     
     @FXML
     private Label label;
+    public static SimpleUser sender;
+    private Invitation stub ;
     
     @FXML
     private void handleButtonAction(ActionEvent event) {
@@ -36,11 +44,24 @@ public class FXMLDocumentController implements Initializable {
         // TODO
     }    
 
-      public void InvationReject(ActionEvent actionEvent){
+    public void InvationReject(ActionEvent actionEvent){
           Node source =(Node)actionEvent.getSource();
           Stage theStage = (Stage)source.getScene().getWindow();
           theStage.close();
-      }
+    }
+    
+    public void InvationAccept(ActionEvent actionEvent){
+        try {
+            Node source =(Node)actionEvent.getSource();
+            stub = Rmi.getInvStub();
+            stub.accpet(LoginController.myData.getId(),sender.getId());
+            System.out.println("I accepted " + sender.getId());
+            Stage theStage = (Stage)source.getScene().getWindow();
+            theStage.close();
+        } catch (RemoteException ex) {
+            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
     
 }

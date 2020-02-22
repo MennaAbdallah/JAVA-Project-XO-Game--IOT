@@ -10,9 +10,9 @@ import java.rmi.RemoteException;
 /* * * @author MinaNagy */
 public interface LoginInterface extends Remote 
 {
-    public boolean login(String username,String pass)throws RemoteException;
-    public SimpleUser getuserData() throws RemoteException;
-    public void registerClient(ClientIF clientRef)throws RemoteException;
+    public int login(String username,String pass)throws RemoteException;
+    public SimpleUser getuserData(int loginId) throws RemoteException;
+    public void registerClient(ClientIF clientRef, int loginId)throws RemoteException;
     public void setUserOnline(int loginId) throws RemoteException;
 
 }

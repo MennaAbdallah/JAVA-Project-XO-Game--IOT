@@ -28,22 +28,17 @@ public class LoginImplem extends UnicastRemoteObject implements LoginInterface {
     public LoginImplem() throws RemoteException { }
 
     @Override
-    public boolean login(String username, String pass) throws RemoteException {
+    public int login(String username, String pass) throws RemoteException {
 
         loginUser.setUserName(username);
         loginUser.setPassword(pass);
-
-        loginId = db.logIn(loginUser);
+        System.out.println(db.logIn(loginUser));
+        return db.logIn(loginUser);
         
-        if (loginId > 0) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
     @Override
-    public SimpleUser getuserData() throws RemoteException {
+    public SimpleUser getuserData(int loginId) throws RemoteException {
 
         loginUser = db.getUser(loginId);
 
@@ -52,9 +47,10 @@ public class LoginImplem extends UnicastRemoteObject implements LoginInterface {
     }
 
     @Override
-    public void registerClient(ClientIF clientRef) throws RemoteException{
+    public void registerClient(ClientIF clientRef, int loginId) throws RemoteException{
         System.out.println(clientRef.hashCode());
-        XoGameServer.connectedClients.put(loginId, clientRef);
+        XoGameServer.connectedClients.putIfAbsent(loginId, clientRef);
+//        XoGameServer.connectedClients.put(loginId, clientRef);
         System.out.println("new refrence is added to server"); 
     }
     

@@ -3,6 +3,7 @@ package LoginScene;
 import DTO.ClientClass;
 import xogameserver.interfaces.LoginInterface;
 import DTO.SimpleUser;
+import InvationScene.FXMLDocumentController;
 import static LoginScene.Main.root;
 import RMI.Rmi;
 import java.io.File;
@@ -20,8 +21,10 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
@@ -81,21 +84,6 @@ public class LoginController implements Initializable {
 //        }
     }
 
-    public void rcvInviteThread() {        
-        invStub = Rmi.getInvStub();
-        new Thread(() -> {
-            while (true) {
-                try {
-                    myRef = invStub.changeStatus(myData.getId());
-                    int senderId = myRef.checkNewInvivtation();
-                    if (senderId != 0) {
-                        System.out.println(senderId + " sent me invitation");                        
-                    }
-                } catch (RemoteException e) {
-                    System.err.println("Client exception: " + e.toString());
-                }
-            }
-        }).start();
 //=======
 //        if (MusicPlayer.getMediaplayer().getStatus() != MediaPlayer.Status.PLAYING) {
 //            if (MusicPlayer.firstTimeCounter == 0) {
@@ -105,7 +93,47 @@ public class LoginController implements Initializable {
 //            }
 //        }
 //>>>>>>> origin/ServerOnOff
+    public void rcvInviteThread() {
+        invStub = Rmi.getInvStub();
+        new Thread(() -> {
+            while (true) {
+                try {
+                    myRef = invStub.changeStatus(myData.getId());
+                    int senderId = myRef.checkNewInvivtation();
+                    if (senderId != 0) {
+                        System.out.println(senderId + " sent me invitation");
+                        SimpleUser sender = stub.getuserData(senderId);
+                        Platform.runLater(() -> {
+                            popUpInvitation(sender);
+                        });
 
+                    }
+                } catch (RemoteException e) {
+                    System.err.println("Client exception: " + e.toString());
+                }
+            }
+        }).start();
+    }
+
+    public void popUpInvitation(SimpleUser sender) {
+        try {
+            s1 = new Stage();
+            s1.initModality(Modality.WINDOW_MODAL);
+            s1.initOwner(Main.myStage);
+            root = FXMLLoader.load(getClass().getResource("/InvationScene/FXMLDocument.fxml"));
+            FXMLDocumentController.sender = sender;
+            Scene scene = new Scene(root);
+            Label l = (Label) scene.lookup("#senderName");
+            l.setText(sender.getNickName());
+            s1.setTitle("TicTacToe");
+            s1.initStyle(StageStyle.UNDECORATED);
+            s1.setResizable(false);
+            s1.setScene(scene);
+            s1.show();
+
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void changeSceneVS() {
@@ -150,15 +178,16 @@ public class LoginController implements Initializable {
         try {
 
             stub = Rmi.getStubLogin();
-            login = stub.login(user_name, password);
+            int userId = stub.login(user_name, password);
             System.out.println("Remote method invoked");
-            if (login == true) {
-                myData = stub.getuserData();
-                stub.setUserOnline(myData.getId());
-
+            if (userId != 0) {
+                myData = stub.getuserData(userId);
+                stub.setUserOnline(userId);
+                System.out.println(userId + " " + myData.getId());
                 myRef = new ClientClass();
                 System.out.println(myRef.hashCode());
-                stub.registerClient(myRef);
+                System.out.println();
+                stub.registerClient(myRef, userId);
 
                 Massage.setVisible(false);
                 changeSceneVS();
@@ -213,27 +242,24 @@ public class LoginController implements Initializable {
         MusicPlayer.checkStatus(IMute, INoMute);
 
     }
-    
-    public void TestPopUp(ActionEvent actionEvent){
+
+    public void TestPopUp(ActionEvent actionEvent) {
         try {
             s1 = new Stage();
             s1.initModality(Modality.WINDOW_MODAL);
             s1.initOwner(Main.myStage);
-            root = FXMLLoader.load(getClass().getResource("/InvationScene/FXMLDocument.fxml"));        
+            root = FXMLLoader.load(getClass().getResource("/InvationScene/FXMLDocument.fxml"));
             Scene scene = new Scene(root);
             s1.setTitle("TicTacToe");
             s1.initStyle(StageStyle.UNDECORATED);
-            s1.setResizable(false); 
+            s1.setResizable(false);
             s1.setScene(scene);
             s1.show();
-            
+
         } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        
+
     }
- 
 
 }

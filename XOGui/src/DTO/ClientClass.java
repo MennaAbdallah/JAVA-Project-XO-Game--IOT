@@ -30,7 +30,7 @@ public class ClientClass extends UnicastRemoteObject implements Serializable, Cl
         requests = new HashMap<>();
         responces = new HashMap<>();
     }
-    
+
     @Override
     public void rcvInvitation(int sendId) throws RemoteException {
         requests.put(sendId, "invite");
@@ -44,33 +44,34 @@ public class ClientClass extends UnicastRemoteObject implements Serializable, Cl
             requests.put(respondId, "declined");
         }
     }
-    
-        @Override
-    public int checkNewInvivtation() throws RemoteException{
-        for (Map.Entry req : requests.entrySet()) {
-            if (req.getValue() == "invite") {
-                req.setValue("seen");
-                return (int) req.getKey();
+
+    @Override
+    public int checkNewInvivtation() throws RemoteException {
+        if (!requests.isEmpty()) {
+            for (Map.Entry req : requests.entrySet()) {
+                if (req.getValue() == "invite") {
+                    req.setValue("seen");
+                    return (int) req.getKey();
+                }
             }
         }
         return 0;
     }
+
     @Override
-    public int checkNewResponce() throws RemoteException{
-        Iterator iterator = responces.entrySet().iterator();
-        do {
-            Map.Entry req = (Map.Entry) iterator.next();
-            if (req.getValue() == "accepted") {
-                responces.remove(req.getKey());
-                return (int) req.getKey();
-            } else if (req.getValue() == "declined") {
-                responces.remove(req.getKey());
-                return -(int) req.getKey();
+    public int checkNewResponce() throws RemoteException {
+        if (!responces.isEmpty()) {
+            for (Map.Entry req : responces.entrySet()) {
+                if (req.getValue() == "accepted") {
+                    responces.remove(req.getKey());
+                    return (int) req.getKey();
+                } else if (req.getValue() == "declined") {
+                    responces.remove(req.getKey());
+                    return -(int) req.getKey();
+                }
             }
-
-        } while (iterator.hasNext());
-        return 0; 
+        }
+        return 0;
     }
-
 
 }

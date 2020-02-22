@@ -7,6 +7,7 @@ package OnlineMenuScene;
 
 import DTO.SimpleUser;
 import LoginScene.LoginController;
+import static LoginScene.LoginController.myRef;
 import LoginScene.Main;
 import LoginScene.MusicPlayer;
 import RMI.Rmi;
@@ -54,13 +55,15 @@ public class OnlineMenuController implements Initializable {
     public ImageView IMute;
     public ImageView INoMute;
 
+    private int invitationSent;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        invitationSent = 0;
         try {
             stub = Rmi.getInvStub();
             Vector<SimpleUser> v = stub.getStatusTable();
-            for (x = 0; x < v.size()-1; x++) {
+            for (x = 0; x < v.size() - 1; x++) {
 
                 Label lUserName = new Label();
                 lUserName.setId("lUserName" + x);
@@ -75,15 +78,18 @@ public class OnlineMenuController implements Initializable {
 
                 if (v.get(x).getStatus() == 1) {
                     Button lInvitaion = new Button();
+                    lInvitaion.setId(Integer.toString(v.get(x).getId()));
                     lInvitaion.setText("Online");
                     gPane.add(lInvitaion, 2, x);
-                    
+                    System.out.println(v.get(x).getId());
                     lInvitaion.setOnAction(event -> {
-                        System.out.println(v.get(x).getId());
-                        sendInvitation(v.get(x).getId());
+                        invitationSent ++;
+                        int id = Integer.parseInt(((Button) event.getSource()).getId());
+                        sendInvitation(id);
                     });
                 }
             }
+            rcvResponceThread();
         } catch (RemoteException ex) {
             System.err.println("Client exception: " + ex.toString());
             ex.printStackTrace();
@@ -123,5 +129,26 @@ public class OnlineMenuController implements Initializable {
         }
 
     }
+
+    public void rcvResponceThread() {
+            new Thread(() -> {
+                while (invitationSent !=0) {
+                    try {
+                        int senderId = myRef.checkNewResponce();
+                        if (senderId != 0) {
+                                invitationSent--;
+                            if(senderId > 0){
+                                //popUp senderId accepted your 
+                                //go to game
+                                System.out.println(senderId + "Accepted your invitation");
+                            }
+
+                        }
+                    } catch (RemoteException e) {
+                        System.err.println("Client exception: " + e.toString());
+                    }
+                }
+            }).start();
+        }
 
 }

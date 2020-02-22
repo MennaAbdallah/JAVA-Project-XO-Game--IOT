@@ -26,7 +26,10 @@ public class InviteImplem extends UnicastRemoteObject implements Invitation {
     
     @Override
     public void invite(int sendId,int rcvId ) throws RemoteException {
+        System.out.println(XoGameServer.connectedClients.keySet());
+        System.out.println(rcvId);
         ClientIF rcvObject = XoGameServer.connectedClients.get(rcvId);        
+        System.out.println(rcvObject.hashCode());
         rcvObject.rcvInvitation(sendId);
         System.out.println(sendId + " sent invitation to "+ rcvId);
     }
