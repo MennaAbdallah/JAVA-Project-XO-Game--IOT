@@ -3,6 +3,7 @@ package LoginScene;
 import DTO.ClientClass;
 import xogameserver.interfaces.LoginInterface;
 import DTO.SimpleUser;
+import static LoginScene.Main.root;
 import RMI.Rmi;
 import java.io.File;
 import java.io.IOException;
@@ -19,14 +20,25 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+<<<<<<< HEAD
 import xogameserver.interfaces.ClientIF;
 import xogameserver.interfaces.Invitation;
+=======
+import javafx.stage.Modality;
+import javafx.stage.Popup;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.stage.WindowEvent;
+>>>>>>> origin/ServerOnOff
 
 /**
  *
@@ -34,6 +46,8 @@ import xogameserver.interfaces.Invitation;
  */
 public class LoginController implements Initializable {
 
+    public static Stage s1;
+    Parent root;
     private LoginInterface stub;
     private Invitation invStub;
     public TextField UserBox;
@@ -60,6 +74,7 @@ public class LoginController implements Initializable {
             Massage.setVisible(true);
         }
 
+<<<<<<< HEAD
         //MediaPlayer me  =MusicPlayer.getMediaplayer();
 //        if(MusicPlayer.getMediaplayer().getStatus()!=MediaPlayer.Status.PLAYING){
 //            MusicPlayer.getMediaplayer().play();
@@ -81,6 +96,15 @@ public class LoginController implements Initializable {
                 }
             }
         }).start();
+=======
+        if (MusicPlayer.getMediaplayer().getStatus() != MediaPlayer.Status.PLAYING) {
+            if (MusicPlayer.firstTimeCounter == 0) {
+                MusicPlayer.getMediaplayer().play();
+                MusicPlayer.firstTimeCounter++;
+
+            }
+        }
+>>>>>>> origin/ServerOnOff
 
     }
 
@@ -188,5 +212,27 @@ public class LoginController implements Initializable {
         MusicPlayer.checkStatus(IMute, INoMute);
 
     }
+    
+    public void TestPopUp(ActionEvent actionEvent){
+        try {
+            s1 = new Stage();
+            s1.initModality(Modality.WINDOW_MODAL);
+            s1.initOwner(Main.myStage);
+            root = FXMLLoader.load(getClass().getResource("/InvationScene/FXMLDocument.fxml"));        
+            Scene scene = new Scene(root);
+            s1.setTitle("TicTacToe");
+            s1.initStyle(StageStyle.UNDECORATED);
+            s1.setResizable(false); 
+            s1.setScene(scene);
+            s1.show();
+            
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+    }
+ 
 
 }

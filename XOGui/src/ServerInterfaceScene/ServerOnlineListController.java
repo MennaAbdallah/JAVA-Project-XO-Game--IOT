@@ -5,11 +5,14 @@
  */
 package ServerInterfaceScene;
 
+import DTO.SimpleUser;
 import LoginScene.Main;
+import LoginScene.MusicPlayer;
 import RMI.Rmi;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
@@ -22,6 +25,7 @@ import java.util.regex.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.ImageView;
 
 /**
  *
@@ -34,6 +38,9 @@ public class ServerOnlineListController implements Initializable {
     
     @FXML
     private TextField serverIPTF,serverPortTF, DBHostTF, DBPortTF;
+    
+        public ImageView IMute;
+    public ImageView INoMute;
     
     public void changeSceneLogin() {
         try{
@@ -89,7 +96,17 @@ public class ServerOnlineListController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
+
+            
     }    
+    
+        public void musicControl(ActionEvent actionEvent) {
+        MusicPlayer.checkStatus(IMute, INoMute);
+
+    }
+    
+    
+    
     
 }

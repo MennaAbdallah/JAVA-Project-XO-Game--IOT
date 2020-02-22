@@ -98,5 +98,6 @@
          </font>
       </Label>
       <Button layoutX="34.0" layoutY="448.0" mnemonicParsing="false" style="-fx-background-color: #353839; -fx-background-radius: 90px;" text="About Us" textFill="WHITE" />
+      <Button layoutX="346.0" layoutY="166.0" mnemonicParsing="false" onAction="#TestPopUp" text="Button" />
    </children>
 </AnchorPane>

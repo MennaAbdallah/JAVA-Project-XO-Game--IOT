@@ -8,6 +8,7 @@ package SignUpScene;
 import DTO.SimpleUser;
 import DTO.User;
 import LoginScene.Main;
+import LoginScene.MusicPlayer;
 import RMI.Rmi;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -24,6 +25,7 @@ import java.util.regex.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.ImageView;
 import xogameserver.interfaces.LoginInterface;
 
 /**
@@ -40,6 +42,12 @@ public class SignUpController implements Initializable {
     private PasswordField passwordTF, confirmPasswordTF;
     private LoginInterface stub;
 
+<<<<<<< HEAD
+=======
+    public ImageView IMute;
+    public ImageView INoMute;
+
+>>>>>>> origin/ServerOnOff
     @FXML
     private void signUpClick(ActionEvent event) {
         boolean flag = true;
@@ -125,8 +133,12 @@ public class SignUpController implements Initializable {
                         + nameTF.getText() + " , NName : " + nickNameTF.getText());
                 System.out.println(user.toString());
                 boolean check = Rmi.getStubSignUp().signUp(user);
+<<<<<<< HEAD
                 System.out.println("true signUp result from DB");
                 if (check == true) {                    
+=======
+                if (check == true) {
+>>>>>>> origin/ServerOnOff
                     changeSceneLogin();
                 }
             } else {
@@ -140,13 +152,22 @@ public class SignUpController implements Initializable {
     }
 
     public void GoBack(ActionEvent actionEvent) {
+<<<<<<< HEAD
         System.out.println("Mina");
+=======
+       
+>>>>>>> origin/ServerOnOff
         changeSceneLogin();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+    }
+
+    public void musicControl(ActionEvent actionEvent) {
+        MusicPlayer.checkStatus(IMute, INoMute);
+
     }
 
 }
