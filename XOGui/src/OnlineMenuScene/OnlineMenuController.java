@@ -7,12 +7,15 @@ package OnlineMenuScene;
 
 import DTO.SimpleUser;
 import LoginScene.LoginController;
+import static LoginScene.LoginController.myData;
 import static LoginScene.LoginController.myRef;
 import LoginScene.Main;
 import LoginScene.MusicPlayer;
 import RMI.Rmi;
 import java.net.URL;
 import java.rmi.RemoteException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.ResourceBundle;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -57,18 +60,32 @@ public class OnlineMenuController implements Initializable {
 
     private int invitationSent;
 
+    /**
+     *
+     * @param v
+     */
+    public void sort(Vector<SimpleUser> v) {
+        Collections.sort(v, 
+                (SimpleUser user1, SimpleUser user2) -> 
+                user1.getScore()>user2.getScore() ? -1 : user1.getScore()==user2.getScore() ? 0 : 1);
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         invitationSent = 0;
+        String nick;
         try {
             stub = Rmi.getInvStub();
             Vector<SimpleUser> v = stub.getStatusTable();
-            for (x = 0; x < v.size() ; x++) {
+            sort(v);
+            for (x = 0; x < v.size(); x++) {
 
                 Label lUserName = new Label();
                 lUserName.setId("lUserName" + x);
-
-                lUserName.setText(v.get(x).getNickName());
+                nick = v.get(x).getNickName();
+                if(nick.equals(myData.getNickName()))
+                   nick = "Me"; 
+                lUserName.setText(nick);
                 gPane.add(lUserName, 0, x);
 
                 Label lScore = new Label();
@@ -76,14 +93,14 @@ public class OnlineMenuController implements Initializable {
                 lScore.setText("" + v.get(x).getScore());
                 gPane.add(lScore, 1, x);
 
-                if (v.get(x).getStatus() == 1) {
+                if (v.get(x).getStatus() == 1 && !"Me".equals(nick)) {
                     Button lInvitaion = new Button();
                     lInvitaion.setId(Integer.toString(v.get(x).getId()));
                     lInvitaion.setText("Online");
                     gPane.add(lInvitaion, 2, x);
                     System.out.println(v.get(x).getId());
                     lInvitaion.setOnAction(event -> {
-                        invitationSent ++;
+                        invitationSent++;
                         int id = Integer.parseInt(((Button) event.getSource()).getId());
                         sendInvitation(id);
                     });
@@ -131,26 +148,26 @@ public class OnlineMenuController implements Initializable {
     }
 
     public void rcvResponceThread() {
-            new Thread(() -> {
-                while (invitationSent !=0) {
-                    try {
-                        int senderId = myRef.checkNewResponce();
-                        if (senderId != 0) {
-                                invitationSent--;
-                            if(senderId > 0){
-                                //popUp senderId accepted your 
-                                //go to game
-                                System.out.println(senderId + "Accepted your invitation");
-                            }else{
-                                System.out.println(senderId + "rejected your invitation");
-                            }
-
+        new Thread(() -> {
+            while (invitationSent != 0) {
+                try {
+                    int senderId = myRef.checkNewResponce();
+                    if (senderId != 0) {
+                        invitationSent--;
+                        if (senderId > 0) {
+                            //popUp senderId accepted your 
+                            //go to game
+                            System.out.println(senderId + "Accepted your invitation");
+                        } else {
+                            System.out.println(senderId + "rejected your invitation");
                         }
-                    } catch (RemoteException e) {
-                        System.err.println("Client exception: " + e.toString());
+
                     }
+                } catch (RemoteException e) {
+                    System.err.println("Client exception: " + e.toString());
                 }
-            }).start();
-        }
+            }
+        }).start();
+    }
 
 }
