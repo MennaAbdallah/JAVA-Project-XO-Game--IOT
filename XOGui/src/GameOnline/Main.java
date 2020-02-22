@@ -1,5 +1,4 @@
 package GameOnline;
-
 import LoginScene.*;
 import RMI.Rmi;
 import java.io.File;
@@ -44,5 +43,4 @@ public class Main extends Application {
     public static Stage getMyStage() {
         return myStage;
     }
-
 }

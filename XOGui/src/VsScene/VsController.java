@@ -14,7 +14,7 @@ import javafx.scene.Scene;
 public class VsController {
     public void changeSceneComputerGame() {
         try{
-        Parent root = FXMLLoader.load(getClass().getResource("/gamescene_1/FXMLDocument.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/gamescene_ai/GameAi.fxml"));
         Main.getMyStage().setTitle("TicTacToe");
         Main.getMyStage().setResizable(false);
         Main.getMyStage().setScene(new Scene(root, 909, 509));

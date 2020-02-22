@@ -86,10 +86,10 @@ public class GameController implements Initializable {
         } catch (RemoteException ex) {
             Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
         }
- /*       new Thread(() -> {
+        /*new Thread(() -> {
             checkOnMessage();
-        }).start();
-*/
+        }).start();*/
+
         new Thread(() -> {
             gameLogic();
         }).start();
@@ -168,14 +168,13 @@ public class GameController implements Initializable {
     public void Send(ActionEvent actionEvent) {
            messageSend.setGameID(gameID);
            messageSend.setPlayerID(playerID);
-           Text text=new Text(textField.getText());
+           Text text=new Text(textField.getText()+"\n");
            text.setStyle("-fx-font-fill:#FF0000");
            textFlow.getChildren().add(text);
            messageSend.setMessage(textField.getText());
            
         try {
             Rmi.getstubGame().sendMessage(messageSend);
-            Rmi.getstubGame().resetMessage();
         } catch (RemoteException ex) {
             Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -268,9 +267,13 @@ public class GameController implements Initializable {
             messageRec=Rmi.getstubGame().getMessage();
             if(messageRec!=null&&messageRec.getGameID()==gameID&&messageRec.getPlayerID()!=playerID){
                     String Message=messageRec.getMessage();
-                    Text text=new Text(Message);
+                    Rmi.getstubGame().resetMessage();
+                    Text text=new Text(Message+"\n");
                     text.setStyle("-fx-font-fill:#0000FF");
-                    textFlow.getChildren().add(text);
+                    Platform.runLater(()->{
+                            textFlow.getChildren().add(text);
+                    });
+                    
             }
         }
         catch(RemoteException ex){
