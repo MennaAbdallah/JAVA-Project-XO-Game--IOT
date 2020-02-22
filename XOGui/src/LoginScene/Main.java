@@ -20,6 +20,7 @@ import xogameserver.interfaces.SignUp;
 public class Main extends Application {
   
    public static Stage myStage;
+   public static Parent root;
    public static boolean connected;
     String path ="src/Song1.mp3";
     //Media media = new Media (new File (path).toURI().toString());
