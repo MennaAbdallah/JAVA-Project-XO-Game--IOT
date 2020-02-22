@@ -6,6 +6,7 @@
 package OnlineMenuScene;
 
 import DTO.SimpleUser;
+import LoginScene.LoginController;
 import LoginScene.Main;
 import LoginScene.MusicPlayer;
 import RMI.Rmi;
@@ -57,12 +58,9 @@ public class OnlineMenuController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         try {
-            System.out.println(" online menue controller initialize");
             stub = Rmi.getInvStub();
-            System.out.println("Inv stub is ready");
             Vector<SimpleUser> v = stub.getStatusTable();
-            System.out.println("get Status Vector done ");
-            for (x = 0; x < v.size(); x++) {
+            for (x = 0; x < v.size()-1; x++) {
 
                 Label lUserName = new Label();
                 lUserName.setId("lUserName" + x);
@@ -79,6 +77,11 @@ public class OnlineMenuController implements Initializable {
                     Button lInvitaion = new Button();
                     lInvitaion.setText("Online");
                     gPane.add(lInvitaion, 2, x);
+                    
+                    lInvitaion.setOnAction(event -> {
+                        System.out.println(v.get(x).getId());
+                        sendInvitation(v.get(x).getId());
+                    });
                 }
             }
         } catch (RemoteException ex) {
@@ -104,6 +107,19 @@ public class OnlineMenuController implements Initializable {
             Main.getMyStage().show();
         } catch (Exception IOException) {
             System.err.println("Error in Change Scence");
+        }
+
+    }
+
+    public void sendInvitation(int rcvId) {
+        try {
+            int myId = LoginController.myData.getId();
+            stub.invite(myId, rcvId);
+            System.out.println("I sent invitation to " + rcvId);
+
+        } catch (Exception e) {
+            System.err.println("Client exception: " + e.toString());
+            e.printStackTrace();
         }
 
     }

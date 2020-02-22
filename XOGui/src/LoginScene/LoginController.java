@@ -154,6 +154,7 @@ public class LoginController implements Initializable {
             System.out.println("Remote method invoked");
             if (login == true) {
                 myData = stub.getuserData();
+                stub.setUserOnline(myData.getId());
 
                 myRef = new ClientClass();
                 System.out.println(myRef.hashCode());

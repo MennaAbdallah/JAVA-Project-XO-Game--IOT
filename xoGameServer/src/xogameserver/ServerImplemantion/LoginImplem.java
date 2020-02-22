@@ -57,4 +57,9 @@ public class LoginImplem extends UnicastRemoteObject implements LoginInterface {
         XoGameServer.connectedClients.put(loginId, clientRef);
         System.out.println("new refrence is added to server"); 
     }
+    
+    @Override
+    public void setUserOnline(int loginId) throws RemoteException{
+        db.setStatus(loginId,1);
+    }
 }
