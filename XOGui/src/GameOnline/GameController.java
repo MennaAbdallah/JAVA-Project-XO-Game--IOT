@@ -1,8 +1,10 @@
 package GameOnline;
-
+import LoginScene.Main;
 import DTO.GameOnlineClass.GamePlay;
 import DTO.GameOnlineClass.MessagePayload;
 import RMI.Rmi;
+import gamescene_ai.GameAiController;
+import java.io.IOException;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.util.HashMap;
@@ -18,7 +20,10 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -42,9 +47,9 @@ public class GameController implements Initializable {
     Game game = new Game();
     GamePlay gamePlaySend = new GamePlay();
     GamePlay gamePlayRecieve = new GamePlay();
-    MessagePayload messageRec=new MessagePayload();
-    MessagePayload messageSend=new MessagePayload();
-    
+    MessagePayload messageRec = new MessagePayload();
+    MessagePayload messageSend = new MessagePayload();
+
     @FXML
     private static final Integer STARTTIME = 15;
     public Label timelabel;
@@ -63,10 +68,45 @@ public class GameController implements Initializable {
     //private Button buttonGame[]=new Button[8];
     @FXML
     private TextField textField;
-        @FXML
+    @FXML
     private TextFlow textFlow;
-        
+
     public Button button;
+
+    public void changeToWinner() {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/winscene/WinScene.fxml"));
+            Scene scene = new Scene(root);
+            Main.getMyStage().setScene(scene);
+            Main.getMyStage().show();
+        } catch (IOException ex) {
+            Logger.getLogger(GameAiController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void changeToLoser() {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/losescene/LoseScene.fxml"));
+            Scene scene = new Scene(root);
+            Main.getMyStage().setScene(scene);
+            Main.getMyStage().show();
+        } catch (IOException ex) {
+            Logger.getLogger(GameAiController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void changeToGameOver() {
+        Parent root;
+        try {
+            root = FXMLLoader.load(getClass().getResource("/game_over/GameOver.fxml"));
+            Scene scene = new Scene(root);
+            Main.getMyStage().setScene(scene);
+            Main.getMyStage().show();
+        } catch (IOException ex) {
+            Logger.getLogger(GameAiController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -87,8 +127,8 @@ public class GameController implements Initializable {
             Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
         }
         /*new Thread(() -> {
-            checkOnMessage();
-        }).start();*/
+         checkOnMessage();
+         }).start();*/
 
         new Thread(() -> {
             gameLogic();
@@ -166,13 +206,13 @@ public class GameController implements Initializable {
     @FXML
 
     public void Send(ActionEvent actionEvent) {
-           messageSend.setGameID(gameID);
-           messageSend.setPlayerID(playerID);
-           Text text=new Text(textField.getText()+"\n");
-           text.setStyle("-fx-font-fill:#FF0000");
-           textFlow.getChildren().add(text);
-           messageSend.setMessage(textField.getText());
-           
+        messageSend.setGameID(gameID);
+        messageSend.setPlayerID(playerID);
+        Text text = new Text(textField.getText() + "\n");
+        text.setStyle("-fx-font-fill:#FF0000");
+        textFlow.getChildren().add(text);
+        messageSend.setMessage(textField.getText());
+
         try {
             Rmi.getstubGame().sendMessage(messageSend);
         } catch (RemoteException ex) {
@@ -191,7 +231,6 @@ public class GameController implements Initializable {
                         new KeyValue(timeSeconds, 0)));
         timeline.playFromStart();
     }
-
     private void gameLogic() {
         while (game.hasWinner() == 0) {
             if (game.isGameOver()) {
@@ -222,7 +261,7 @@ public class GameController implements Initializable {
                 } catch (RemoteException ex) {
                     Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                    //TODO : gameSideObj.getGameID(1)==>1==>Player ID come from obj from Server Status online Scence
+                //TODO : gameSideObj.getGameID(1)==>1==>Player ID come from obj from Server Status online Scence
                 //TODO : 1==>Player ID 
                 newPlace = 0;
                 System.out.println("Exit All Loop");
@@ -230,7 +269,7 @@ public class GameController implements Initializable {
             } else {
                 while (true) {
                     if (game.hasWinner() != 0 || game.isGameOver()) {
-                        break;
+                           break;
                     }
                     try {
                         gamePlayRecieve = Rmi.getstubGame().getPlay();
@@ -259,28 +298,69 @@ public class GameController implements Initializable {
             }
 
         }
+        System.out.println("Exit From While : ");
+        System.out.println("Has winner"+ game.hasWinner());
+        
+        if(game.hasWinner()==type){
+            System.out.println("changeToWinner()");
+            Platform.runLater(() -> {
+                   changeToWinner();
+            });
+        }else if(game.hasWinner()==0){
+            System.out.println("changeToGameOver()");
+            Platform.runLater(() -> {
+                changeToGameOver();
+            });
+        }else{
+            System.out.println("changeToGameOver()");
+            Platform.runLater(() -> {
+                changeToLoser();
+                });
+        }
+//            if (game.hasWinner() == 1) {
+//                if(type==1){
+//                    System.out.println("changeToWinner()");
+//                    changeToWinner();
+//                }
+//                else{
+//                    System.out.println("changeToLoser()");
+//                    changeToLoser();
+//                }
+//                
+//            }
+//            if (game.hasWinner() == -1) {
+//                
+//                if(type==-1){
+//                    System.out.println("changeToWinner()");
+//                    changeToWinner();
+//                }
+//                else{
+//                    System.out.println("changeToLoser()");
+//                    changeToLoser();
+//                }
+//            }
+//            if (game.isGameOver() && game.hasWinner() == 0) {
+//                System.out.println("changeToGameOver()");
+//                changeToGameOver();
+//            }
     }
-
-    private void checkOnMessage(){
-        while(true){
-        try{
-            messageRec=Rmi.getstubGame().getMessage();
-            if(messageRec!=null&&messageRec.getGameID()==gameID&&messageRec.getPlayerID()!=playerID){
-                    String Message=messageRec.getMessage();
+    private void checkOnMessage() {
+        while (true) {
+            try {
+                messageRec = Rmi.getstubGame().getMessage();
+                if (messageRec != null && messageRec.getGameID() == gameID && messageRec.getPlayerID() != playerID) {
+                    String Message = messageRec.getMessage();
                     Rmi.getstubGame().resetMessage();
-                    Text text=new Text(Message+"\n");
+                    Text text = new Text(Message + "\n");
                     text.setStyle("-fx-font-fill:#0000FF");
-                    Platform.runLater(()->{
-                            textFlow.getChildren().add(text);
+                    Platform.runLater(() -> {
+                        textFlow.getChildren().add(text);
                     });
-                    
+                }
+            } catch (RemoteException ex) {
+                System.out.println("Error in Get Message ");
             }
         }
-        catch(RemoteException ex){
-            System.out.println("Error in Get Message ");
-        }
-        }
-  
-        
+
     }
 }
