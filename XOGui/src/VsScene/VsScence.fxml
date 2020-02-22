@@ -14,7 +14,7 @@
             <Image url="@123999354-versus-vector-template-background-battle-or-competition-concept-template-red-and-white-players-video.jpg" />
          </image>
       </ImageView>
-      <Button defaultButton="true" layoutX="61.0" layoutY="80.0" mnemonicParsing="false" onAction="#computerPlay" prefHeight="61.0" prefWidth="175.0" style="-fx-background-color: #e60000; -fx-background-radius: 20px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="Computer" textFill="WHITE">
+      <Button defaultButton="true" layoutX="61.0" layoutY="80.0" mnemonicParsing="false" onAction="#computerPlay" prefHeight="61.0" prefWidth="190.0" style="-fx-background-color: #e60000; -fx-background-radius: 20px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="Computer" textFill="WHITE">
          <font>
             <Font name="Bookman Old Style" size="26.0" />
          </font>
