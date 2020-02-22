@@ -24,7 +24,7 @@ public class DBManagment {
 
     private static DBManagment dbm = null;
     private static Connection c = null;
-    private static String dbPort = "3307";
+    private static String dbPort = "3306";
     private static String dbDriver = "com.mysql.jdbc.Driver";
     private static String dbUser = "root";
     private static String dbPass = "";
@@ -33,7 +33,7 @@ public class DBManagment {
 
         try {
             Class.forName(dbDriver).newInstance();
-            c = DriverManager.getConnection("jdbc:mysql://localhost:" + dbPort + "/XoGameDB", dbUser, dbPass);
+            c = DriverManager.getConnection("jdbc:mysql://localhost:" + dbPort + "/xo_game_db", dbUser, dbPass);
             System.out.println("db connected");
         } catch (InstantiationException | IllegalAccessException ex) {
             Logger.getLogger(DBManagment.class.getName()).log(Level.SEVERE, null, ex);

@@ -5,6 +5,9 @@
  */
 package xogameserver;
 
+import DTO.GameOnlineClass.GameHandler;
+import DTO.GameOnlineClass.GameHandlersList;
+import xogameserver.ServerImplemantion.GameImp;
 import java.net.InetAddress;
 import java.rmi.UnknownHostException;
 import java.rmi.registry.LocateRegistry;
@@ -29,9 +32,9 @@ public class XoGameServer {
     public static void main(String[] args) throws java.net.UnknownHostException {
         
         
-        System.setProperty("java.rmi.server.hostname", InetAddress.getLocalHost().getHostAddress());
+        System.setProperty("java.rmi.server.hostname", "192.168.1.8");
 
-        System.setProperty("java.security.policy","file:C:/Users/fegoo/Desktop/JAVA-Project-XO-Game--IOT/xoGameServer/src/xogameserver/security.policy");
+        System.setProperty("java.security.policy","file:./src/xogameserver/security.policy");
         if (System.getSecurityManager() == null)
         {
             System.setSecurityManager(new SecurityManager());
@@ -39,15 +42,23 @@ public class XoGameServer {
         
         
          try { 
+             GameHandler gameHandler= new GameHandler();
+             gameHandler.setGameID(1);
+             gameHandler.setFirstPlayerID(1);
+             gameHandler.setSecondPlayerID(2);
+             GameHandlersList.addGameHandler(gameHandler);
+             
          // Instantiating the implementation class 
          LoginImplem loginStub = new LoginImplem(); 
          SignUpImplem signStub = new SignUpImplem();
-                 
+         GameImp gameStub = new GameImp();
+   
          // Binding the remote object (stub) in the registry 
-         Registry registry = LocateRegistry.createRegistry(5030); 
+         Registry registry = LocateRegistry.createRegistry(5100); 
          
          registry.bind("login", loginStub);
          registry.bind("signup", signStub);
+         registry.bind("game", gameStub);
          System.err.println("Server ready"); 
       } catch (Exception e) { 
          System.err.println("Server exception: " + e.toString()); 
