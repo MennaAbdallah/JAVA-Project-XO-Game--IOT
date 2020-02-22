@@ -45,7 +45,7 @@ public class DBManagment {
     public static void main(String[] args) {
         try {
             DBManagment dbm = new DBManagment();
-            
+
             User user = new User("nesr", "nesr", "nesr", "duur", 3, 10, 1);
             boolean s = dbm.checkPassword(3, "neesr");
             System.out.println(s);
@@ -55,7 +55,7 @@ public class DBManagment {
     }
     ///////////////////////////
 
-    public static DBManagment getInstance () {
+    public static DBManagment getInstance() {
 
         if (dbm == null) {
             try {
@@ -102,13 +102,12 @@ public class DBManagment {
     public static String getDBPass() {
         return dbPass;
     }
-    
 
-    public int getScore(int id){
+    public int getScore(int id) {
         try {
             PreparedStatement stmt = c.prepareStatement("SELECT score FROM user where id = ?;",
                     ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            stmt.setInt(1, id);            
+            stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             rs.first();
             return rs.getInt("score");
@@ -117,14 +116,14 @@ public class DBManagment {
         }
         return -1;
     }
-    
-    public boolean setScore(int id, int newScore){
-        
+
+    public boolean setScore(int id, int newScore) {
+
         try {
             PreparedStatement stmt = c.prepareStatement("UPDATE user SET score = ? where id = ?;",
                     ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             stmt.setInt(1, newScore);
-            stmt.setInt(2, id);            
+            stmt.setInt(2, id);
             int rs = stmt.executeUpdate();
             return rs > 0;
         } catch (SQLException ex) {
@@ -261,6 +260,34 @@ public class DBManagment {
         }
 
         throw new NullPointerException("can't update user table by new password");
+    }
+
+    public Vector getAllUsersStatus() {
+        
+        Vector<SimpleUser> statusVector = new Vector();
+        System.out.println("status Vector created");
+        try {
+            PreparedStatement stmt
+                    = c.prepareStatement("select id,score,status,username,nickname from user",
+                            ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+
+            ResultSet rs = stmt.executeQuery();
+            System.out.println("rs is ready");
+            while (rs.next()) {
+                statusVector.add(new SimpleUser(rs.getString("username"),
+                        rs.getString("nickname"),
+                        rs.getInt("id"),
+                        rs.getInt("score"),
+                        Integer.valueOf(rs.getString("status"))
+                ));
+            }
+            System.out.println("vector is ready");
+            return statusVector;
+        } catch (SQLException ex) {
+            Logger.getLogger(DBManagment.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        throw new NullPointerException("Can't connect to db");
     }
 
 }

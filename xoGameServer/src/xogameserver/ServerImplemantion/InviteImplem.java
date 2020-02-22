@@ -9,6 +9,9 @@ package xogameserver.ServerImplemantion;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.sql.SQLException;
+import java.util.Vector;
+import xogameserver.DBManagment;
 import xogameserver.XoGameServer;
 import xogameserver.interfaces.ClientIF;
 import xogameserver.interfaces.Invitation;
@@ -18,7 +21,7 @@ import xogameserver.interfaces.Invitation;
  * @author nesreen
  */
 public class InviteImplem extends UnicastRemoteObject implements Invitation {
-
+    DBManagment dbm = DBManagment.getInstance();
     public InviteImplem() throws RemoteException { }
     
     @Override
@@ -45,4 +48,10 @@ public class InviteImplem extends UnicastRemoteObject implements Invitation {
         rcvObject.rcvResponse(responceId,false);
         System.out.println(responceId + " declined invitation to "+ rcvId);    }
 
+    @Override
+    public Vector getStatusTable() throws RemoteException {
+        System.out.println("getting All Users Status"); 
+        return dbm.getAllUsersStatus();
+        
+    }
 }

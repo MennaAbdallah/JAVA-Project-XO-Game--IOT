@@ -55,7 +55,6 @@ public class LoginImplem extends UnicastRemoteObject implements LoginInterface {
     public void registerClient(ClientIF clientRef) throws RemoteException{
         System.out.println(clientRef.hashCode());
         XoGameServer.connectedClients.put(loginId, clientRef);
-//                clientRef.rcvInvitation();
         System.out.println("new refrence is added to server"); 
     }
 }

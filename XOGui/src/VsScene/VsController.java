@@ -3,6 +3,7 @@ package VsScene;
 import LoginScene.LoginController;
 import LoginScene.Main;
 import RMI.Rmi;
+import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -38,8 +39,10 @@ public class VsController {
         Main.getMyStage().setScene(new Scene(root, 909, 509));
         Main.getMyStage().show();
         }
-        catch(Exception IOException){
-            System.err.println("Error in Change Scence");
+        catch(IOException IOException){
+            System.err.println("Client exception: " + IOException.toString());
+            IOException.printStackTrace();
+//            System.err.println("Error in Change Scence");
         }
     }
     public void antherPlayer(ActionEvent actionEvent){

@@ -42,12 +42,12 @@ public class SignUpController implements Initializable {
     private PasswordField passwordTF, confirmPasswordTF;
     private LoginInterface stub;
 
-<<<<<<< HEAD
-=======
+//<<<<<<< HEAD
+//=======
     public ImageView IMute;
     public ImageView INoMute;
 
->>>>>>> origin/ServerOnOff
+//>>>>>>> origin/ServerOnOff
     @FXML
     private void signUpClick(ActionEvent event) {
         boolean flag = true;
@@ -133,12 +133,11 @@ public class SignUpController implements Initializable {
                         + nameTF.getText() + " , NName : " + nickNameTF.getText());
                 System.out.println(user.toString());
                 boolean check = Rmi.getStubSignUp().signUp(user);
-<<<<<<< HEAD
+//<<<<<<< HEAD
                 System.out.println("true signUp result from DB");
                 if (check == true) {                    
-=======
-                if (check == true) {
->>>>>>> origin/ServerOnOff
+//=======
+//>>>>>>> origin/ServerOnOff
                     changeSceneLogin();
                 }
             } else {
@@ -151,12 +150,13 @@ public class SignUpController implements Initializable {
         return false;
     }
 
+
     public void GoBack(ActionEvent actionEvent) {
-<<<<<<< HEAD
+//<<<<<<< HEAD
         System.out.println("Mina");
-=======
+//=======
        
->>>>>>> origin/ServerOnOff
+//>>>>>>> origin/ServerOnOff
         changeSceneLogin();
     }
 

@@ -101,10 +101,10 @@ public class ServerOnlineListController implements Initializable {
             
     }    
     
-        public void musicControl(ActionEvent actionEvent) {
-        MusicPlayer.checkStatus(IMute, INoMute);
-
-    }
+//        public void musicControl(ActionEvent actionEvent) {
+//        MusicPlayer.checkStatus(IMute, INoMute);
+//
+//    }
     
     
     

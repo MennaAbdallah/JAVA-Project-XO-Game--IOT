@@ -31,13 +31,13 @@ public class Main extends Application {
 //          Rmi.setPort(5005);
 //        }
     
-<<<<<<< HEAD
+//<<<<<<< HEAD
 //    String path ="./src/Song1.mp3";
 //    Media media = new Media (new File (path).toURI().toString());
 //    MediaPlayer mediaplayer = new MediaPlayer(media);
-=======
+//=======
 
->>>>>>> origin/ServerOnOff
+//>>>>>>> origin/ServerOnOff
 
     @Override
     public void start(Stage primaryStage) throws Exception{

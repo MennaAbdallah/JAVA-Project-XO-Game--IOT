@@ -49,7 +49,7 @@ public class XoGameServer {
          InviteImplem invStub = new InviteImplem();
                  
          // Binding the remote object (stub) in the registry 
-         Registry registry = LocateRegistry.createRegistry(5010); 
+         Registry registry = LocateRegistry.createRegistry(5005); 
          
          registry.bind("login", loginStub);
          registry.bind("signup", signStub);

@@ -24,7 +24,7 @@ public class Rmi {
     private static SignUp stub2;
     private static Invitation invStub;
     private static String ip="127.0.0.1";
-    private static int port=5010;
+    private static int port=5005;
     private static boolean connected=false;
     
     

@@ -8,6 +8,7 @@ package xogameserver.interfaces;
 import DTO.ClientClass;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.Vector;
 
 /**
  *
@@ -18,5 +19,6 @@ public interface Invitation extends Remote{
     public void invite(int sendId, int rcvId)throws RemoteException;
     public void accpet(int responceId, int rcvId)throws RemoteException;
     public void decline(int responceId, int rcvId)throws RemoteException;
+    public Vector getStatusTable() throws RemoteException;
 }
 

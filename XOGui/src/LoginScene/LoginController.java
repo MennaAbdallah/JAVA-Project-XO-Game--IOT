@@ -29,16 +29,16 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-<<<<<<< HEAD
+//<<<<<<< HEAD
 import xogameserver.interfaces.ClientIF;
 import xogameserver.interfaces.Invitation;
-=======
+//=======
 import javafx.stage.Modality;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
->>>>>>> origin/ServerOnOff
+//>>>>>>> origin/ServerOnOff
 
 /**
  *
@@ -74,7 +74,7 @@ public class LoginController implements Initializable {
             Massage.setVisible(true);
         }
 
-<<<<<<< HEAD
+//<<<<<<< HEAD
         //MediaPlayer me  =MusicPlayer.getMediaplayer();
 //        if(MusicPlayer.getMediaplayer().getStatus()!=MediaPlayer.Status.PLAYING){
 //            MusicPlayer.getMediaplayer().play();
@@ -96,15 +96,15 @@ public class LoginController implements Initializable {
                 }
             }
         }).start();
-=======
-        if (MusicPlayer.getMediaplayer().getStatus() != MediaPlayer.Status.PLAYING) {
-            if (MusicPlayer.firstTimeCounter == 0) {
-                MusicPlayer.getMediaplayer().play();
-                MusicPlayer.firstTimeCounter++;
-
-            }
-        }
->>>>>>> origin/ServerOnOff
+//=======
+//        if (MusicPlayer.getMediaplayer().getStatus() != MediaPlayer.Status.PLAYING) {
+//            if (MusicPlayer.firstTimeCounter == 0) {
+//                MusicPlayer.getMediaplayer().play();
+//                MusicPlayer.firstTimeCounter++;
+//
+//            }
+//        }
+//>>>>>>> origin/ServerOnOff
 
     }
 
