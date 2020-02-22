@@ -1,6 +1,7 @@
 package GameOnline;
 
 import DTO.GameOnlineClass.GamePlay;
+import DTO.GameOnlineClass.MessagePayload;
 import RMI.Rmi;
 import java.net.URL;
 import java.rmi.RemoteException;
@@ -20,7 +21,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.util.Duration;
 import sun.audio.AudioPlayer;
 
@@ -38,6 +42,9 @@ public class GameController implements Initializable {
     Game game = new Game();
     GamePlay gamePlaySend = new GamePlay();
     GamePlay gamePlayRecieve = new GamePlay();
+    MessagePayload messageRec=new MessagePayload();
+    MessagePayload messageSend=new MessagePayload();
+    
     @FXML
     private static final Integer STARTTIME = 15;
     public Label timelabel;
@@ -54,6 +61,11 @@ public class GameController implements Initializable {
     @FXML
     private Button button00, button01, button02, button10, button11, button12, button22, button21, button20;
     //private Button buttonGame[]=new Button[8];
+    @FXML
+    private TextField textField;
+        @FXML
+    private TextFlow textFlow;
+        
     public Button button;
 
     @Override
@@ -74,75 +86,12 @@ public class GameController implements Initializable {
         } catch (RemoteException ex) {
             Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+ /*       new Thread(() -> {
+            checkOnMessage();
+        }).start();
+*/
         new Thread(() -> {
-
-            while (game.hasWinner() == 0) {
-                if (game.isGameOver()) {
-                    break;
-                }
-                System.out.println(game.getPlayerTurn());
-                if (game.getPlayerTurn() == type) {
-                    System.out.println("Enter Loop");
-                    while (newPlace == 0);
-                    System.out.println("Exit Loop1");
-                    game.insertMove(newPlace, type);
-                    Platform.runLater(() -> {
-                        if (type == 1) {
-                            labelsHash.get(newPlace).setText("x");
-                            System.out.println("x");
-                        } else {
-                            labelsHash.get(newPlace).setText("o");
-                            System.out.println("o");
-                        }
-                        ((Button) eventButton.getSource()).setDisable(true);
-                    });
-
-                    try {
-                        gamePlaySend.setGameID(gameID);
-                        gamePlaySend.setPlayerID(playerID);
-                        gamePlaySend.setNewPlace(newPlace);
-                        Rmi.getstubGame().setPlay(gamePlaySend);
-                    } catch (RemoteException ex) {
-                        Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    //TODO : gameSideObj.getGameID(1)==>1==>Player ID come from obj from Server Status online Scence
-                    //TODO : 1==>Player ID 
-                    newPlace = 0;
-                    System.out.println("Exit All Loop");
-
-                } else {
-                    while (true) {
-                        if (game.hasWinner() != 0 || game.isGameOver()) {
-                            break;
-                        }
-                        try {
-                            gamePlayRecieve = Rmi.getstubGame().getPlay();
-                        } catch (RemoteException ex) {
-                            Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        if (gameID == gamePlayRecieve.getGameID() && playerID != gamePlayRecieve.getPlayerID()) {
-
-                            Platform.runLater(() -> {
-                                if (type == 1) {
-                                    game.insertMove(gamePlayRecieve.getNewPlace(), -1);
-                                    labelsHash.get(gamePlayRecieve.getNewPlace()).setText("o");
-                                    System.out.println("o");
-                                } else {
-                                    game.insertMove(gamePlayRecieve.getNewPlace(), 1);
-                                    labelsHash.get(gamePlayRecieve.getNewPlace()).setText("x");
-                                    System.out.println("x");
-                                }
-                            });
-
-                            break;
-                        }
-
-                    }
-
-                }
-
-            }
+            gameLogic();
         }).start();
 
     }
@@ -217,7 +166,19 @@ public class GameController implements Initializable {
     @FXML
 
     public void Send(ActionEvent actionEvent) {
-
+           messageSend.setGameID(gameID);
+           messageSend.setPlayerID(playerID);
+           Text text=new Text(textField.getText());
+           text.setStyle("-fx-font-fill:#FF0000");
+           textFlow.getChildren().add(text);
+           messageSend.setMessage(textField.getText());
+           
+        try {
+            Rmi.getstubGame().sendMessage(messageSend);
+            Rmi.getstubGame().resetMessage();
+        } catch (RemoteException ex) {
+            Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void start(ActionEvent actionEvent) {
@@ -232,4 +193,91 @@ public class GameController implements Initializable {
         timeline.playFromStart();
     }
 
+    private void gameLogic() {
+        while (game.hasWinner() == 0) {
+            if (game.isGameOver()) {
+                break;
+            }
+            System.out.println(game.getPlayerTurn());
+            if (game.getPlayerTurn() == type) {
+                System.out.println("Enter Loop");
+                while (newPlace == 0);
+                System.out.println("Exit Loop1");
+                game.insertMove(newPlace, type);
+                Platform.runLater(() -> {
+                    if (type == 1) {
+                        labelsHash.get(newPlace).setText("x");
+                        System.out.println("x");
+                    } else {
+                        labelsHash.get(newPlace).setText("o");
+                        System.out.println("o");
+                    }
+                    ((Button) eventButton.getSource()).setDisable(true);
+                });
+
+                try {
+                    gamePlaySend.setGameID(gameID);
+                    gamePlaySend.setPlayerID(playerID);
+                    gamePlaySend.setNewPlace(newPlace);
+                    Rmi.getstubGame().setPlay(gamePlaySend);
+                } catch (RemoteException ex) {
+                    Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                    //TODO : gameSideObj.getGameID(1)==>1==>Player ID come from obj from Server Status online Scence
+                //TODO : 1==>Player ID 
+                newPlace = 0;
+                System.out.println("Exit All Loop");
+
+            } else {
+                while (true) {
+                    if (game.hasWinner() != 0 || game.isGameOver()) {
+                        break;
+                    }
+                    try {
+                        gamePlayRecieve = Rmi.getstubGame().getPlay();
+                    } catch (RemoteException ex) {
+                        Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    if (gameID == gamePlayRecieve.getGameID() && playerID != gamePlayRecieve.getPlayerID()) {
+
+                        Platform.runLater(() -> {
+                            if (type == 1) {
+                                game.insertMove(gamePlayRecieve.getNewPlace(), -1);
+                                labelsHash.get(gamePlayRecieve.getNewPlace()).setText("o");
+                                System.out.println("o");
+                            } else {
+                                game.insertMove(gamePlayRecieve.getNewPlace(), 1);
+                                labelsHash.get(gamePlayRecieve.getNewPlace()).setText("x");
+                                System.out.println("x");
+                            }
+                        });
+
+                        break;
+                    }
+
+                }
+
+            }
+
+        }
+    }
+
+    private void checkOnMessage(){
+        while(true){
+        try{
+            messageRec=Rmi.getstubGame().getMessage();
+            if(messageRec!=null&&messageRec.getGameID()==gameID&&messageRec.getPlayerID()!=playerID){
+                    String Message=messageRec.getMessage();
+                    Text text=new Text(Message);
+                    text.setStyle("-fx-font-fill:#0000FF");
+                    textFlow.getChildren().add(text);
+            }
+        }
+        catch(RemoteException ex){
+            System.out.println("Error in Get Message ");
+        }
+        }
+  
+        
+    }
 }

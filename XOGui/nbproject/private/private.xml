@@ -3,15 +3,22 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/ITI%20intake%2040/19-Java/Java_Project/JAVA-Project-XO-Game--IOT/XOGui/src/OnlineMenuScene/OnlineMenu.java</file>
-            <file>file:/E:/ITI%20intake%2040/19-Java/Java_Project/JAVA-Project-XO-Game--IOT/XOGui/src/OnlineMenuScene/OnlineMenuController.java</file>
-            <file>file:/E:/ITI%20intake%2040/19-Java/Java_Project/JAVA-Project-XO-Game--IOT/XOGui/src/RMI/Rmi.java</file>
-            <file>file:/E:/ITI%20intake%2040/19-Java/Java_Project/JAVA-Project-XO-Game--IOT/XOGui/src/xogameserver/interfaces/GameInterface.java</file>
-            <file>file:/E:/ITI%20intake%2040/19-Java/Java_Project/JAVA-Project-XO-Game--IOT/XOGui/src/GameOnline/GameController.java</file>
-            <file>file:/E:/ITI%20intake%2040/19-Java/Java_Project/JAVA-Project-XO-Game--IOT/XOGui/src/DTO/GameOnlineClass/GamePlay.java</file>
-            <file>file:/E:/ITI%20intake%2040/19-Java/Java_Project/JAVA-Project-XO-Game--IOT/XOGui/src/LoginScene/Main.java</file>
-            <file>file:/E:/ITI%20intake%2040/19-Java/Java_Project/JAVA-Project-XO-Game--IOT/XOGui/src/GameOnline/Main.java</file>
-            <file>file:/E:/ITI%20intake%2040/19-Java/Java_Project/JAVA-Project-XO-Game--IOT/XOGui/src/GameOnline/GameScene.fxml</file>
+            <file>file:/I:/XOGui/src/xogameserver/interfaces/LoginInterface.java</file>
+            <file>file:/I:/XOGui/src/RMI/Rmi.java</file>
+            <file>file:/I:/XOGui/src/LoginScene/Main.java</file>
+            <file>file:/I:/XOGui/src/GameOnline/Main.java</file>
+            <file>file:/I:/XOGui/src/gamescene_1/FXMLDocumentController.java</file>
+            <file>file:/I:/XOGui/src/GameOnline/GameController.java</file>
+            <file>file:/I:/XOGui/src/VsScene/VsMain.java</file>
+            <file>file:/I:/XOGui/src/VsScene/VsController.java</file>
+            <file>file:/I:/XOGui/src/RMI/security.policy</file>
+            <file>file:/I:/XOGui/src/GameOnline/Game.java</file>
+            <file>file:/I:/XOGui/src/gamescene_1/FXMLDocument.fxml</file>
+            <file>file:/I:/XOGui/src/LoginScene/MusicPlayer.java</file>
+            <file>file:/I:/XOGui/src/gamescene_1/Game.java</file>
+            <file>file:/I:/XOGui/src/GameOnline/GameScene.fxml</file>
+            <file>file:/I:/XOGui/src/gamescene_1/GameScene.java</file>
+            <file>file:/I:/XOGui/src/LoginScene/LoginController.java</file>
         </group>
     </open-files>
 </project-private>

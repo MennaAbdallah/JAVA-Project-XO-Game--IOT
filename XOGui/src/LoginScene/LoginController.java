@@ -16,45 +16,57 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
 
 /**
  *
  * @author fegoo
  */
-
 public class LoginController implements Initializable {
 
     private LoginInterface stub;
+    @FXML
     public TextField UserBox;
+
+    @FXML
     public ImageView IMute;
+    @FXML
     public ImageView INoMute;
+    @FXML
     public PasswordField PasswordBox;
+    @FXML
     public Button LoginBtn;
+    @FXML
     public Label Massage;
-    
+    @FXML
+    private Circle status;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        if(Rmi.isConnected()==false) {
+        Rmi.connectedSevrver();
+        if (Rmi.isConnected() == false) {
             Massage.setText("Failure in Network");
             Massage.setVisible(true);
+            status.setFill(Paint.valueOf("#808080"));//paint
+            //status.setStyle(null);//String
         }
-        
-        MediaPlayer me  =MusicPlayer.getMediaplayer();
-        
-        if(MusicPlayer.getMediaplayer().getStatus()!= MediaPlayer.Status.PLAYING){ 
+        MediaPlayer me = MusicPlayer.getMediaplayer();
+
+        if (MusicPlayer.getMediaplayer().getStatus() != MediaPlayer.Status.PLAYING) {
             MusicPlayer.getMediaplayer().play();
         }
-        
 
     }
 
+    @FXML
     public void changeSceneVS() {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/VsScene/VsScence.fxml"));
@@ -67,6 +79,7 @@ public class LoginController implements Initializable {
         }
     }
 
+    @FXML
     public void changeSceneSignUP() {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/signupscene/Signup.fxml"));
@@ -79,6 +92,7 @@ public class LoginController implements Initializable {
         }
     }
 
+    @FXML
     public void changeSceneServer() {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/ServerInterfaceScene/ServerInterfaceScene.fxml"));
@@ -91,6 +105,7 @@ public class LoginController implements Initializable {
         }
     }
 
+    @FXML
     public boolean networkLogin(String user_name, String password) {
         boolean login = false;
         try {
@@ -121,6 +136,7 @@ public class LoginController implements Initializable {
         return login;
     }
 
+    @FXML
     public void test(ActionEvent actionEvent) {
         if (Rmi.isConnected() == true) {
             if (PasswordBox.getText().equals("") || UserBox.getText().equals("")) {
@@ -139,23 +155,25 @@ public class LoginController implements Initializable {
         }
     }
 
+    @FXML
     public void signUpButton(ActionEvent actionEvent) {
-        
+
         System.out.println("signUpButton");
-        if(Rmi.isConnected()==true){
+        if (Rmi.isConnected() == true) {
             changeSceneSignUP();
-        }
-        else{
+        } else {
             Massage.setText("Failure in Network");
             Massage.setVisible(true);
         }
-        
+
     }
 
+    @FXML
     public void serverStatus(ActionEvent actionEvent) {
         changeSceneServer();
     }
 
+    @FXML
     public void musicControl(ActionEvent actionEvent) {
         MusicPlayer.checkStatus(IMute, INoMute);
 

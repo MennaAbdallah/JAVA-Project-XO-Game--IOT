@@ -28,7 +28,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         myStage=primaryStage;
         System.out.println("First line");
-        Rmi.connectedSevrver();
+       // new Thread(()->{
+        //}).start();
         Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
        //Parent root = FXMLLoader.load(getClass().getResource("/GameOnline/GameScene.fxml"));
         Scene scene = new Scene(root, 909, 509);
