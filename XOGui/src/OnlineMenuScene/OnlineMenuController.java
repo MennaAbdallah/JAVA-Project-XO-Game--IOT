@@ -63,7 +63,7 @@ public class OnlineMenuController implements Initializable {
         try {
             stub = Rmi.getInvStub();
             Vector<SimpleUser> v = stub.getStatusTable();
-            for (x = 0; x < v.size() - 1; x++) {
+            for (x = 0; x < v.size() ; x++) {
 
                 Label lUserName = new Label();
                 lUserName.setId("lUserName" + x);
@@ -141,6 +141,8 @@ public class OnlineMenuController implements Initializable {
                                 //popUp senderId accepted your 
                                 //go to game
                                 System.out.println(senderId + "Accepted your invitation");
+                            }else{
+                                System.out.println(senderId + "rejected your invitation");
                             }
 
                         }
