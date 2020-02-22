@@ -14,14 +14,16 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import xogameserver.interfaces.SignUp;
+
+
 /**
  *
  * @author fegoo
  */
 public class Main extends Application {
   
-   public static Stage myStage;
-   public static boolean connected;
+    public static Stage myStage;
+    public static boolean connected;
     String path ="E:\\ITI intake 40\\19-Java\\Java_Project\\JAVA-Project-XO-Game--IOT\\XOGui\\srcsrc\\Song1.mp3";
     //Media media = new Media (new File (path).toURI().toString());
    // MediaPlayer mediaplayer = new MediaPlayer(media);

@@ -5,6 +5,7 @@ import DTO.GameOnlineClass.MessagePayload;
 import RMI.Rmi;
 import java.net.URL;
 import java.rmi.RemoteException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.Scanner;
@@ -22,21 +23,23 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.BoxBlur;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.util.Duration;
 import sun.audio.AudioPlayer;
-
+import xogameserver.DBManagment;
 /**
  *
  * @author mina
  */
 public class GameController implements Initializable {
-
+    DBManagment db = DBManagment.getInstance();
     static int type = 1;
     static int playerID = 1;
-    int gameID = 0;
+    int gameID = 1;
     volatile int newPlace = 0;
     volatile MouseEvent eventButton = null;
     Game game = new Game();
@@ -44,7 +47,8 @@ public class GameController implements Initializable {
     GamePlay gamePlayRecieve = new GamePlay();
     MessagePayload messageRec=new MessagePayload();
     MessagePayload messageSend=new MessagePayload();
-    
+    @FXML
+    AnchorPane pauseAnchor, mainAnchor, textAnchor;
     @FXML
     private static final Integer STARTTIME = 15;
     public Label timelabel;
@@ -162,7 +166,22 @@ public class GameController implements Initializable {
         newPlace = 9;
         eventButton = event;
     }
-
+    
+    @FXML
+    private void pauseAction(MouseEvent event){
+        pauseAnchor.setVisible(true);
+        BoxBlur boxBlur = new BoxBlur();
+        mainAnchor.setEffect(boxBlur);
+        db.setBoardStatus(gameID, Arrays.toString(game.getXoGame()));
+    }
+    
+    
+    @FXML
+    private void resumeClick(MouseEvent event){
+        pauseAnchor.setVisible(false);
+        mainAnchor.setEffect(null);
+        db.getBoardStatus(gameID);
+    }
     @FXML
 
     public void Send(ActionEvent actionEvent) {

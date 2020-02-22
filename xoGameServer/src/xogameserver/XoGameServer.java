@@ -32,7 +32,7 @@ public class XoGameServer {
     public static void main(String[] args) throws java.net.UnknownHostException {
         
         
-        System.setProperty("java.rmi.server.hostname", "192.168.1.8");
+        System.setProperty("java.rmi.server.hostname", "192.168.1.7");
 
         System.setProperty("java.security.policy","file:./src/xogameserver/security.policy");
         if (System.getSecurityManager() == null)

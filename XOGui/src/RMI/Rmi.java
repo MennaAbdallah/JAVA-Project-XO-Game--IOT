@@ -19,7 +19,7 @@ public class Rmi {
     private static LoginInterface stub;
     private static SignUp stub2;
     private static GameInterface stubGame;
-    private static String ip="192.168.1.8";
+    private static String ip="192.168.1.7";
     private static int port=5100;
     private static boolean connected=false;
     public static LoginInterface getStubLogin() {
