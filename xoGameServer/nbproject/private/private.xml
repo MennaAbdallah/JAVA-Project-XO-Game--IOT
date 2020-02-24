@@ -3,7 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/fegoo/Desktop/JAVA-Project-XO-Game--IOT/xoGameServer/src/xogameserver/XoGameServer.java</file>
+            <file>file:/home/nesreen/Downloads/java/JAVA-Project-XO-Game--IOT/xoGameServer/src/xogameserver/DBManagment.java</file>
+            <file>file:/home/nesreen/Downloads/java/JAVA-Project-XO-Game--IOT/xoGameServer/src/xogameserver/interfaces/ClientIF.java</file>
+            <file>file:/home/nesreen/Downloads/java/JAVA-Project-XO-Game--IOT/xoGameServer/src/xogameserver/ServerImplemantion/InviteImplem.java</file>
+            <file>file:/home/nesreen/Downloads/java/JAVA-Project-XO-Game--IOT/xoGameServer/src/xogameserver/ServerImplemantion/LoginImplem.java</file>
+            <file>file:/home/nesreen/Downloads/java/JAVA-Project-XO-Game--IOT/xoGameServer/src/xogameserver/XoGameServer.java</file>
         </group>
     </open-files>
 </project-private>
