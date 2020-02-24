@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="BackGround" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="509.0" prefWidth="909.0" style="-fx-background-color: #FFD9A5;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="OnOffServerScene.FXMLDocumentController">
+   <children>
+      <ToggleButton fx:id="on" layoutX="324.0" layoutY="255.0" mnemonicParsing="false" onAction="#OnBtn" prefHeight="86.0" prefWidth="92.0" style="-fx-background-radius: 500px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="On" />
+      <ToggleButton fx:id="off" layoutX="484.0" layoutY="255.0" mnemonicParsing="false" onAction="#OffBtn" prefHeight="86.0" prefWidth="92.0" style="-fx-background-radius: 500px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="OFF" />
+      <TextField layoutX="324.0" layoutY="186.0" prefHeight="32.0" prefWidth="220.0" promptText="ServerPort" />
+      <TextField layoutX="324.0" layoutY="142.0" prefHeight="32.0" prefWidth="220.0" promptText="ServerIp" />
+   </children>
+</AnchorPane>

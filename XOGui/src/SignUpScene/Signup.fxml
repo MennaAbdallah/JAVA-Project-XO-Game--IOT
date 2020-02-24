@@ -70,5 +70,22 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
+      <Button layoutX="184.0" layoutY="424.0" mnemonicParsing="false" onAction="#musicControl" prefHeight="56.0" prefWidth="89.0" style="-fx-background-color: #FFD9A5;">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <ImageView fx:id="INoMute" blendMode="DARKEN" fitHeight="32.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@vo.jpg" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <ImageView fx:id="IMute" blendMode="DARKEN" fitHeight="25.0" fitWidth="27.0" layoutX="229.0" layoutY="440.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@mute.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
