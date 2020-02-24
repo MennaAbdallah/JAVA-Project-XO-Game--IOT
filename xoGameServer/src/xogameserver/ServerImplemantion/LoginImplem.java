@@ -27,28 +27,31 @@ public class LoginImplem extends UnicastRemoteObject implements LoginInterface {
     }
 
     @Override
-    public boolean login(String username, String pass) throws RemoteException {
+    public int login(String username, String pass) throws RemoteException {
 
         loginUser.setUserName(username);
         loginUser.setPassword(pass);
         System.out.println(loginUser.getUserName());
         loginId = db.logIn(loginUser);
+        db.setStatus(loginId, 1);
 
         if (loginId > 0) {
-            return true;
+            return loginId;
         } else {
-            return false;
+            return -1;
         }
 
     }
 
     @Override
-    public SimpleUser getuserData() {
-
+    public SimpleUser getuserData(int userID) throws RemoteException {
         loginUser = db.getUser(loginId);
-
         return loginUser;
+    }
 
+    @Override
+    public void setUserLogoutStatus(int userID) throws RemoteException {
+        db.setStatus(userID, 0);
     }
 
 }

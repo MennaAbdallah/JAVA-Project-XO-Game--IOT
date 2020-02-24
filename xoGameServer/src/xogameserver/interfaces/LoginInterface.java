@@ -14,6 +14,8 @@ import DTO.SimpleUser;
  * @author MinaNagy
  */
 public interface LoginInterface extends Remote {
-    public boolean login(String username,String pass)throws RemoteException;
-      public SimpleUser getuserData()throws RemoteException;
+    public int login(String username,String pass)throws RemoteException;
+    public SimpleUser getuserData(int userID)throws RemoteException;
+    public void setUserLogoutStatus(int userID)throws RemoteException;
+
 }

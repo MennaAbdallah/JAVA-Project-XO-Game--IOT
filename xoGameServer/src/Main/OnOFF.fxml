@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="BackGround" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="509.0" prefWidth="909.0" style="-fx-background-color: #FFD9A5;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.OnOFFController">
+   <children>
+      <ToggleButton fx:id="on" layoutX="324.0" layoutY="255.0" mnemonicParsing="false" onAction="#OnBtn" prefHeight="86.0" prefWidth="92.0" style="-fx-background-radius: 500px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="On" />
+      <ToggleButton fx:id="off" layoutX="484.0" layoutY="255.0" mnemonicParsing="false" onAction="#OffBtn" prefHeight="86.0" prefWidth="92.0" style="-fx-background-radius: 500px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="OFF" />
+      <TextField  fx:id="port" layoutX="324.0" layoutY="186.0" prefHeight="32.0" prefWidth="220.0" promptText="ServerPort" />
+      <TextField fx:id="ip" layoutX="324.0" layoutY="142.0" prefHeight="32.0" prefWidth="220.0" promptText="ServerIp" />
+      <Label fx:id="Massage" alignment="CENTER" layoutX="340.0" layoutY="360.0" prefHeight="17.0" prefWidth="222.0" text="Check your fields " textAlignment="CENTER" textFill="#FFFFFF">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

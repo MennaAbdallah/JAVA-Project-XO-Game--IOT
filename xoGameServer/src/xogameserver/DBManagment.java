@@ -24,7 +24,7 @@ public class DBManagment {
 
     private static DBManagment dbm = null;
     private static Connection c = null;
-    private static String dbPort = "3307";
+    private static String dbPort = "3306";
     private static String dbDriver = "com.mysql.jdbc.Driver";
     private static String dbUser = "root";
     private static String dbPass = "";
@@ -33,7 +33,7 @@ public class DBManagment {
 
         try {
             Class.forName(dbDriver).newInstance();
-            c = DriverManager.getConnection("jdbc:mysql://localhost:" + dbPort + "/XoGameDB", dbUser, dbPass);
+            c = DriverManager.getConnection("jdbc:mysql://localhost:" + dbPort + "/xo_game_db", dbUser, dbPass);
             System.out.println("db connected");
         } catch (InstantiationException | IllegalAccessException ex) {
             Logger.getLogger(DBManagment.class.getName()).log(Level.SEVERE, null, ex);
@@ -275,6 +275,34 @@ public class DBManagment {
         }
 
         throw new NullPointerException("can't update user table by new password");
+    }
+    
+     public Vector getAllUsersStatus() {
+        
+        Vector<SimpleUser> statusVector = new Vector();
+        System.out.println("status Vector created");
+        try {
+            PreparedStatement stmt
+                    = c.prepareStatement("select id,score,status,username,nickname from user",
+                            ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+
+            ResultSet rs = stmt.executeQuery();
+            //System.out.println("rs is ready");
+            while (rs.next()) {
+                statusVector.add(new SimpleUser(rs.getString("username"),
+                        rs.getString("nickname"),
+                        rs.getInt("id"),
+                        rs.getInt("score"),
+                        Integer.valueOf(rs.getString("status"))
+                ));
+            }
+            System.out.println("vector is ready");
+            return statusVector;
+        } catch (SQLException ex) {
+            Logger.getLogger(DBManagment.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        throw new NullPointerException("Can't connect to db");
     }
 
 }
