@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="509.0" maxWidth="909.0" minHeight="509.0" minWidth="909.0" prefHeight="509.0" prefWidth="909.0" style="-fx-background-color: #FFD9A5;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="VsScene.VsController">
+<Pane maxHeight="509.0" maxWidth="909.0" minHeight="509.0" minWidth="909.0" prefHeight="509.0" prefWidth="909.0" style="-fx-background-color: #FFD9A5;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="VsScene.VsController">
    <children>
       <ImageView blendMode="DARKEN" cache="true" fitHeight="509.0" fitWidth="864.0" layoutX="61.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -37,7 +37,7 @@
             <Insets />
          </opaqueInsets>
       </Button>
-      <Button layoutX="51.0" layoutY="405.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="210.0" style="-fx-background-color: #e60000; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-radius: 30px;" text="My Profile" textFill="WHITE">
+      <Button fx:id="profileBtn" layoutX="51.0" layoutY="405.0" mnemonicParsing="false" onMouseClicked="#profileOnAction" prefHeight="61.0" prefWidth="210.0" style="-fx-background-color: #e60000; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-radius: 30px;" text="My Profile" textFill="WHITE">
          <font>
             <Font size="30.0" />
          </font>

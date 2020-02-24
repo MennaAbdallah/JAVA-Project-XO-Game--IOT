@@ -18,39 +18,43 @@ import xogameserver.interfaces.SignUp;
  *
  * @author fegoo
  */
-
 public class Main extends Application {
-  
-   public static Stage myStage;
-   public static Parent root;
-   public static boolean connected;
-//      Main(){
-//          connected=false;
-//          Rmi.setIp("127.0.0.1");
-//          Rmi.setPort(5005);
-//        }
-    
 
-
+    public static Stage myStage;
+    public static Parent root;
+    public static boolean connected;
+    String path = "src/Song1.mp3";
+    //Media media = new Media (new File (path).toURI().toString());
+    // MediaPlayer mediaplayer = new MediaPlayer(media);
     @Override
-    public void start(Stage primaryStage) throws Exception{
-        myStage=primaryStage;
+    public void start(Stage primaryStage) throws Exception {
+        myStage = primaryStage;
         System.out.println("First line");
-        Rmi.connectedSevrver();
-         root = FXMLLoader.load(getClass().getResource("login.fxml"));
+        // new Thread(()->{
+        //}).start();
+        Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+        //Parent root = FXMLLoader.load(getClass().getResource("/GameOnline/GameScene.fxml"));
         Scene scene = new Scene(root, 909, 509);
         primaryStage.setTitle("TicTacToe");
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);
         primaryStage.show();
-
     }
 
     public static void main(String[] args) {
         launch(args);
     }
+
     public static Stage getMyStage() {
         return myStage;
+    }
+
+    @Override
+    public void stop() throws Exception {
+        if (UserData.getSimpleUser() != null) {
+            Rmi.getStubLogin().setUserLogoutStatus(UserData.getSimpleUser().getId());
+        }
+        super.stop(); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="XOGUI_BeforeMina.jnlp">
+  <information>
+    <title>XOGUI_BeforeMina</title>
+    <vendor>MinaNagy</vendor>
+    <description>null</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="XOGUI_BeforeMina.jar" size="23953908" download="eager" />
+  </resources>
+  <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="XOGUI_BeforeMina" >
+    <param name="requiredFXVersion" value="8.0+"/>
+  </applet-desc>
+  <jfx:javafx-desc  width="800" height="600" main-class="LoginScene.Main"  name="XOGUI_BeforeMina" />
+  <update check="always"/>
+</jnlp>
