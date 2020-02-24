@@ -5,8 +5,8 @@
 - xo is a game developed by students at ITI Intake 40 - IOT - Open Source Track.
 - It's part of evalution process at Java applications course.
 
-## Deployment
-We deployed this game using JavaFX and RMI 
+## Development
+We develop this game using JavaFX and RMI 
 
 
 ## Lure
